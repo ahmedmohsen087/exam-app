@@ -34,5 +34,19 @@ class Validators {
     return null;
   }
 
-}
+  static String? confirmPasswordValidator(
+      String? value,
+      String password,
+      ) {
+    if (value == null || value.isEmpty) {
+      return 'Confirm your password';
+    }
 
+    if (value != password) {
+      return 'Passwords do not match';
+    }
+
+    return null;
+  }
+
+}
