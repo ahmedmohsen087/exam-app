@@ -7,27 +7,36 @@ class AppTheme {
       filled: true,
       fillColor: AppColors.white,
       border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide.none,
       ),
       enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+
         borderSide: const BorderSide(
           color: AppColors.gray,
           width: 1,
         ),
       ),
       focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+
         borderSide: const BorderSide(
           color: AppColors.gray,
           width: 2,
         ),
       ),
       errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+
         borderSide: const BorderSide(
           color: AppColors.red,
           width: 1.5,
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+
         borderSide: const BorderSide(
           color: AppColors.red,
           width: 2,
@@ -42,9 +51,42 @@ class AppTheme {
         fontSize: 14,
       ),
       contentPadding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 18,
+        horizontal: 8,
+        vertical: 16,
       ),
     ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(AppColors.blue),
+          foregroundColor: WidgetStateProperty.all(Colors.white),
+          padding: WidgetStateProperty.all(
+            EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 24),
+          ),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+        ),
+      ),
+    textTheme: TextTheme(
+      bodyLarge: TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 20,
+        color: AppColors.black
+      ),
+      bodyMedium: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 16,
+          color: AppColors.white
+      ),
+      bodySmall: TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 13,
+          color: AppColors.black
+      )
+    )
   );
 }
