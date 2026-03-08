@@ -2,7 +2,7 @@ import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/validators.dart';
+import '../../../../../core/utils/validators.dart';
 
 class SignIn extends StatelessWidget {
 

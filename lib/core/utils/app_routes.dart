@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../feature/sign_in/presentation/pages/sign_in.dart';
+import '../../features/auth/sign_in/presentation/pages/sign_in.dart';
 
 class AppRoutes {
 
