@@ -97,19 +97,12 @@ class SignIn extends StatelessWidget {
                         color: AppColors.black,
                       ),
                     ),
-                    Text(
-                      'Sign up ',
-                      style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
-                        color: AppColors.blue,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, SignIn.routeName);
+                        Navigator.pushNamed(context, SignUp.routeName);
                       },
                       child: Text(
-                        'Login',
+                        'Sign up',
                         style: AppTheme.lightTheme.textTheme.bodyMedium
                             ?.copyWith(
                               color: AppColors.blue,
