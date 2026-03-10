@@ -11,6 +11,7 @@ abstract class DioModule {
         baseUrl: Endpoints.baseUrl,
         connectTimeout: const Duration(seconds: 30),
         receiveTimeout: const Duration(seconds: 30),
+
       ),
     );
 

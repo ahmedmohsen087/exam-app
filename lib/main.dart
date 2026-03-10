@@ -1,6 +1,6 @@
 import 'package:exam_app/core/theme/app_theme.dart';
 import 'package:exam_app/core/utils/app_routes.dart';
-import 'package:exam_app/features/auth/sign_in/presentation/pages/sign_in_screen.dart';
+import 'package:exam_app/features/auth/sign_up/presentation/pages/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'config/di/di.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      initialRoute: SignInScreen.routeName,
+      initialRoute: SignUpScreen.routeName,
       routes: AppRoutes.routes,
     );
   }
