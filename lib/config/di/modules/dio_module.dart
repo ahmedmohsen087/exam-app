@@ -14,6 +14,16 @@ abstract class DioModule {
       ),
     );
 
+    dio.interceptors.add(
+      LogInterceptor(
+        requestBody: true,
+        request: true,
+        requestHeader: true,
+        responseBody: true,
+        responseHeader: true,
+      ),
+    );
+
     return dio;
   }
 }
