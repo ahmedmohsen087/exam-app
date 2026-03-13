@@ -22,7 +22,6 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     this._resetPasswordUseCase,
   ) : super(ForgotPasswordState());
 
-  /// Step 1: Send Email
   Future<void> sendEmail(String email) async {
     emit(
       state.copyWith(
@@ -59,7 +58,6 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     }
   }
 
-  /// Step 2: Verify Reset Code
   Future<void> verifyResetCode(String code) async {
     emit(
       state.copyWith(
@@ -96,7 +94,6 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     }
   }
 
-  /// Step 3: Reset Password
   Future<void> resetPassword({
     required String newPassword,
     required String confirmPassword,
@@ -111,7 +108,6 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       ),
     );
 
-    // Optional: validate that newPassword == confirmPassword before sending
     if (newPassword != confirmPassword) {
       emit(
         state.copyWith(

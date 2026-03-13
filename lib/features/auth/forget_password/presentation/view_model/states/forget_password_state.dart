@@ -14,7 +14,6 @@ class ForgotPasswordState {
     this.resetPasswordState = resetPasswordState ?? this.resetPasswordState;
   }
 
-  // Null-safe BaseState
   BaseState<ForgotPasswordEntity?> forgotPasswordState =
       BaseState<ForgotPasswordEntity?>(isLoading: false, data: null, msg: null);
 

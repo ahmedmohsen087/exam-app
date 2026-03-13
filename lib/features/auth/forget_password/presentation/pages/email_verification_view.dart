@@ -13,7 +13,6 @@ class EmailVerificationView extends StatelessWidget {
 
   EmailVerificationView({super.key});
 
-  // Updated: 6 fields instead of 4
   final List<TextEditingController> otpControllers = List.generate(
     6,
     (_) => TextEditingController(),
@@ -67,7 +66,6 @@ class EmailVerificationView extends StatelessWidget {
               ),
               const SizedBox(height: 40),
 
-              // OTP boxes - now 6
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(
@@ -103,7 +101,6 @@ class EmailVerificationView extends StatelessWidget {
                       onPressed: state.verifyCodeState.isLoading
                           ? null
                           : () {
-                              // Join all 6 fields into one code string
                               final code = otpControllers
                                   .map((c) => c.text)
                                   .join();
@@ -135,7 +132,6 @@ class EmailVerificationView extends StatelessWidget {
     );
   }
 
-  // OTP box widget
   Widget _buildOtpBox(TextEditingController controller) {
     return Container(
       height: 65,

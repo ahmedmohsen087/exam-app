@@ -119,7 +119,6 @@ class ResetPasswordView extends StatelessWidget {
                                 return;
                               }
 
-                              // Only pass newPassword now, no email
                               cubit.resetPassword(
                                 newPassword: newPassword,
                                 confirmPassword: confirmPassword,
