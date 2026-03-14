@@ -12,7 +12,7 @@ SignInResponse _$SignInResponseFromJson(Map<String, dynamic> json) =>
       token: json['token'] as String?,
       user: json['user'] == null
           ? null
-          : User.fromJson(json['user'] as Map<String, dynamic>),
+          : UserDTO.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SignInResponseToJson(SignInResponse instance) =>

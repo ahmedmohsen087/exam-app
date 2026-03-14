@@ -19,7 +19,7 @@ class VerifyResetCodeRepoImpl implements VerifyResetCodeRepo {
 
     if (response is Success<VerifyResetCodeResponse>) {
       return Success<VerifyResetCodeEntity>(
-        data: response.data.toVerifyResetCodeEntity(),
+        data: response.data?.toVerifyResetCodeEntity(),
       );
     } else if (response is Failed<VerifyResetCodeResponse>) {
       return Failed<VerifyResetCodeEntity>(msg: response.msg);

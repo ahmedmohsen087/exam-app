@@ -2,6 +2,7 @@ import 'package:exam_app/config/di/di.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/theme/app_theme.dart';
 import 'package:exam_app/core/utils/dialog_util.dart';
+import 'package:exam_app/features/auth/sign_in/presentation/pages/sign_in_screen.dart';
 import 'package:exam_app/features/auth/sign_up/presentation/view_model/cubit/sign_up_cubit.dart';
 import 'package:exam_app/features/auth/sign_up/presentation/view_model/states/sign_up_state.dart';
 import 'package:flutter/material.dart';
@@ -216,7 +217,7 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          // Navigator.pushNamed(context, SignIn.routeName);
+                           Navigator.pushNamed(context, SignInScreen.routeName);
                         },
                         child: Text(
                           'Login',

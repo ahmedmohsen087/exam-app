@@ -21,7 +21,7 @@ class ResetPasswordRepoImpl implements ResetPasswordRepo {
 
     if (response is Success<ResetPasswordResponse>) {
       return Success<ResetPasswordEntity>(
-        data: response.data.toResetPasswordEntity(),
+        data: response.data?.toResetPasswordEntity(),
       );
     } else if (response is Failed<ResetPasswordResponse>) {
       return Failed<ResetPasswordEntity>(msg: response.msg);

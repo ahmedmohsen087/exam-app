@@ -21,7 +21,7 @@ class ForgetPasswordRepoImpl implements ForgetPasswordRepo {
 
     if (response is Success<ForgotPasswordResponse>) {
       return Success<ForgotPasswordEntity>(
-        data: response.data.toForgotPasswordEntity(),
+        data: response.data?.toForgotPasswordEntity(),
       );
     } else if (response is Failed<ForgotPasswordResponse>) {
       return Failed<ForgotPasswordEntity>(msg: response.msg);
