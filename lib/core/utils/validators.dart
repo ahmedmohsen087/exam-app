@@ -1,8 +1,7 @@
 class Validators {
-
   static String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Enter Your Email';
+      return 'This Email is not vaild';
     }
 
     final emailRegex = RegExp(
@@ -21,8 +20,7 @@ class Validators {
       return 'Enter Your Password';
     }
 
-    final passwordRegex =
-    RegExp(r'^(?=.*[A-Z])(?=.*[0-9]).{8,}$');
+    final passwordRegex = RegExp(r'^(?=.*[A-Z])(?=.*[0-9]).{8,}$');
 
     if (!passwordRegex.hasMatch(value)) {
       return 'Password must contain:\n'
@@ -34,10 +32,7 @@ class Validators {
     return null;
   }
 
-  static String? confirmPasswordValidator(
-      String? value,
-      String password,
-      ) {
+  static String? confirmPasswordValidator(String? value, String password) {
     if (value == null || value.isEmpty) {
       return 'Confirm your password';
     }
@@ -49,4 +44,17 @@ class Validators {
     return null;
   }
 
+  static String? otpValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Code cannot be empty";
+    }
+    if (value.length < 4) {
+      return "Please enter the full 4-digit code";
+    }
+    // You can add a check if it's numeric only
+    if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+      return "Invalid code format";
+    }
+    return null;
+  }
 }
