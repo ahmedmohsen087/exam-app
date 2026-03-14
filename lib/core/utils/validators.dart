@@ -1,7 +1,7 @@
 class Validators {
   static String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Enter Your Email';
+      return 'This Email is not valid';
     }
 
     final emailRegex = RegExp(
@@ -53,6 +53,19 @@ class Validators {
       return 'Username must be at least 3 characters';
     }
 
+    return null;
+  }
+  static String? otpValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Code cannot be empty";
+    }
+    if (value.length < 4) {
+      return "Please enter the full 4-digit code";
+    }
+    // You can add a check if it's numeric only
+    if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+      return "Invalid code format";
+    }
     return null;
   }
 }
