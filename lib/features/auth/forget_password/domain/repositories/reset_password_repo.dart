@@ -4,5 +4,6 @@ import 'package:exam_app/features/auth/forget_password/domain/entities/reset_pas
 abstract class ResetPasswordRepo {
   Future<BaseResponse<ResetPasswordEntity>> resetPassword({
     required String newPassword,
+    required String email
   });
 }

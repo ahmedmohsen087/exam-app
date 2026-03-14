@@ -17,6 +17,8 @@ class ResetPasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final email = ModalRoute.of(context)!.settings.arguments as String;
     final ForgotPasswordCubit cubit = getIt.get<ForgotPasswordCubit>();
 
     return BlocProvider<ForgotPasswordCubit>(
@@ -122,6 +124,7 @@ class ResetPasswordView extends StatelessWidget {
                               cubit.resetPassword(
                                 newPassword: newPassword,
                                 confirmPassword: confirmPassword,
+                                email: email
                               );
                             },
                       style: ElevatedButton.styleFrom(

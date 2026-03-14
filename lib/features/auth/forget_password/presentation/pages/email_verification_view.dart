@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class EmailVerificationView extends StatelessWidget {
   static const String routeName = 'email-verification';
 
+
   EmailVerificationView({super.key});
 
   final List<TextEditingController> otpControllers = List.generate(
@@ -21,8 +22,7 @@ class EmailVerificationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ForgotPasswordCubit cubit = getIt<ForgotPasswordCubit>();
-    final SharedPreferences prefs = getIt<SharedPreferences>();
-    final sharedEmail = prefs.getString("forgetPasswordEmail") ?? "-";
+    final email = ModalRoute.of(context)!.settings.arguments as String;
 
     return BlocProvider<ForgotPasswordCubit>(
       create: (_) => cubit,
@@ -70,7 +70,7 @@ class EmailVerificationView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(
                   6,
-                  (index) => _buildOtpBox(otpControllers[index]),
+                  (index) => Expanded(child: _buildOtpBox(otpControllers[index])),
                 ),
               ),
 
@@ -88,7 +88,7 @@ class EmailVerificationView extends StatelessWidget {
                       Navigator.pushNamed(
                         context,
                         'reset-password',
-                        arguments: sharedEmail,
+                        arguments: email,
                       );
                     }
                   }

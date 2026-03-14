@@ -4,5 +4,6 @@ import 'package:exam_app/features/auth/forget_password/data/models/response/rese
 abstract class ResetPasswordRemoteDataSource {
   Future<BaseResponse<ResetPasswordResponse>> resetPassword({
     required String newPassword,
+    required String email
   });
 }

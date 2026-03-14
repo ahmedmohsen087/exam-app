@@ -1,14 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:injectable/injectable.dart';
-import 'package:exam_app/config/base_state/base_state.dart';
 import 'package:exam_app/config/base_response/base_response.dart';
-import 'package:exam_app/features/auth/forget_password/domain/usecases/forget_password_use_case.dart';
-import 'package:exam_app/features/auth/forget_password/domain/usecases/verify_reset_code_use_case.dart';
-import 'package:exam_app/features/auth/forget_password/domain/usecases/reset_password_use_case.dart';
-import 'package:exam_app/features/auth/forget_password/presentation/view_model/states/forget_password_state.dart';
+import 'package:exam_app/config/base_state/base_state.dart';
 import 'package:exam_app/features/auth/forget_password/domain/entities/forgot_password_entity.dart';
-import 'package:exam_app/features/auth/forget_password/domain/entities/verify_reset_code_entity.dart';
 import 'package:exam_app/features/auth/forget_password/domain/entities/reset_password_entity.dart';
+import 'package:exam_app/features/auth/forget_password/domain/entities/verify_reset_code_entity.dart';
+import 'package:exam_app/features/auth/forget_password/domain/usecases/forget_password_use_case.dart';
+import 'package:exam_app/features/auth/forget_password/domain/usecases/reset_password_use_case.dart';
+import 'package:exam_app/features/auth/forget_password/domain/usecases/verify_reset_code_use_case.dart';
+import 'package:exam_app/features/auth/forget_password/presentation/view_model/states/forget_password_state.dart';
+import 'package:injectable/injectable.dart';
 
 @injectable
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
@@ -97,6 +97,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   Future<void> resetPassword({
     required String newPassword,
     required String confirmPassword,
+    required String email,
   }) async {
     emit(
       state.copyWith(
@@ -121,7 +122,10 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       return;
     }
 
-    final response = await _resetPasswordUseCase(newPassword: newPassword);
+    final response = await _resetPasswordUseCase(
+      newPassword: newPassword,
+      email: email,
+    );
 
     if (response is Success<ResetPasswordEntity>) {
       emit(

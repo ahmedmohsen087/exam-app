@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgetPasswordView extends StatelessWidget {
   static const String routeName = 'forget-password';
+
   ForgetPasswordView({super.key});
 
   final TextEditingController emailController = TextEditingController();
@@ -77,7 +78,11 @@ class ForgetPasswordView extends StatelessWidget {
                         message: state.forgotPasswordState.msg!,
                       );
                     } else if (state.forgotPasswordState.data != null) {
-                      Navigator.pushNamed(context, 'email-verification');
+                      Navigator.pushNamed(
+                        context,
+                        'email-verification',
+                        arguments: emailController.text,
+                      );
                     }
                   }
                 },

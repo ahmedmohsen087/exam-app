@@ -11,8 +11,12 @@ class ResetPasswordUseCase {
 
   Future<BaseResponse<ResetPasswordEntity>> call({
     required String newPassword,
+    required String email,
   }) async {
-    final response = await _repo.resetPassword(newPassword: newPassword);
+    final response = await _repo.resetPassword(
+      newPassword: newPassword,
+      email: email,
+    );
 
     if (response is Success<ResetPasswordEntity>) {
       return Success<ResetPasswordEntity>(data: response.data);

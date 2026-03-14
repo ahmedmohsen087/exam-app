@@ -17,13 +17,13 @@ class ResetPasswordRemoteDataSourceImpl
   @override
   Future<BaseResponse<ResetPasswordResponse>> resetPassword({
     required String newPassword,
+    required String email
   }) async {
     try {
-      final SharedPreferences prefs = getIt<SharedPreferences>();
-      final sharedEmail = prefs.getString("forgetPasswordEmail") ?? "-";
+
       final response = await client.resetPassword({
         'newPassword': newPassword,
-        'email': sharedEmail,
+        'email': email,
       });
       return Success<ResetPasswordResponse>(data: response);
     } on DioException catch (e) {

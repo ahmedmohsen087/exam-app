@@ -14,9 +14,11 @@ class ResetPasswordRepoImpl implements ResetPasswordRepo {
   @override
   Future<BaseResponse<ResetPasswordEntity>> resetPassword({
     required String newPassword,
+    required String email,
   }) async {
     final response = await remoteDataSource.resetPassword(
       newPassword: newPassword,
+      email: email,
     );
 
     if (response is Success<ResetPasswordResponse>) {
