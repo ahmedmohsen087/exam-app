@@ -37,7 +37,7 @@ class SignUpScreen extends StatelessWidget {
           children: [
             Icon(Icons.arrow_back_ios_new_outlined),
             SizedBox(width: 10),
-            Text('Login', style: AppTheme.lightTheme.textTheme.bodyLarge),
+            Text('Sign Up', style: AppTheme.lightTheme.textTheme.bodyLarge),
           ],
         ),
       ),
@@ -121,6 +121,7 @@ class SignUpScreen extends StatelessWidget {
                             hintText: "Enter password",
                             floatingLabelBehavior: FloatingLabelBehavior.always,
                           ),
+                          validator: Validators.passwordValidator,
                         ),
                       ),
 
@@ -188,12 +189,14 @@ class SignUpScreen extends StatelessWidget {
                           }
                         },
                         listener: (context, state) {
-                          if (!state.api1State.isLoading && state.api1State.msg!=null) {
+                          if (!state.api1State.isLoading &&
+                              state.api1State.msg != null) {
                             DialogUtils.showMessage(
                               context,
                               message: state.api1State.msg!,
                             );
-                          }else if(!state.api1State.isLoading && state.api1State.data!=null){
+                          } else if (!state.api1State.isLoading &&
+                              state.api1State.data != null) {
                             DialogUtils.showMessage(
                               context,
                               message: "Sign Up Succeed",
@@ -217,7 +220,7 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                           Navigator.pushNamed(context, SignInScreen.routeName);
+                          Navigator.pushNamed(context, SignInScreen.routeName);
                         },
                         child: Text(
                           'Login',
