@@ -1,7 +1,6 @@
 import 'package:exam_app/config/di/di.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/theme/app_theme.dart';
-import 'package:exam_app/core/utils/dialog_util.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/pages/forget_password_view.dart';
 import 'package:exam_app/features/auth/sign_in/presentation/view_model/States/sign_in_state.dart';
 import 'package:exam_app/features/auth/sign_in/presentation/view_model/cubit/sign_in_view_model.dart';
@@ -116,17 +115,19 @@ class SignInScreen extends StatelessWidget {
                           }
                         },
                         listener: (context, state) {
-                          print("listener: ${state.api1State.msg}");
                           if (state.api1State.isLoading == false &&
                               state.api1State.msg == null) {
-                            Navigator.of(
-                              context,
-                            ).pushNamed(HomeScreen.routeName);
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                              HomeScreen.routeName,
+                              (route) => false,
+                            );
                           } else if (state.api1State.isLoading == false &&
                               state.api1State.msg != null) {
-                            DialogUtils.showMessage(
-                              context,
-                              message: state.api1State.msg!,
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(state.api1State.msg!),
+                                duration: Duration(seconds: 2),
+                              ),
                             );
                           }
                         },

@@ -1,7 +1,7 @@
 import 'package:exam_app/config/di/di.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/theme/app_theme.dart';
-import 'package:exam_app/core/utils/dialog_util.dart';
+import 'package:exam_app/features/Home/presentation/pages/home_screen.dart';
 import 'package:exam_app/features/auth/sign_in/presentation/pages/sign_in_screen.dart';
 import 'package:exam_app/features/auth/sign_up/presentation/view_model/cubit/sign_up_cubit.dart';
 import 'package:exam_app/features/auth/sign_up/presentation/view_model/states/sign_up_state.dart';
@@ -191,15 +191,18 @@ class SignUpScreen extends StatelessWidget {
                         listener: (context, state) {
                           if (!state.api1State.isLoading &&
                               state.api1State.msg != null) {
-                            DialogUtils.showMessage(
-                              context,
-                              message: state.api1State.msg!,
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(state.api1State.msg!),
+                                duration: Duration(seconds: 2),
+                              ),
                             );
                           } else if (!state.api1State.isLoading &&
                               state.api1State.data != null) {
-                            DialogUtils.showMessage(
+                            Navigator.pushNamedAndRemoveUntil(
                               context,
-                              message: "Sign Up Succeed",
+                              HomeScreen.routeName,
+                              (route) => false,
                             );
                           }
                         },

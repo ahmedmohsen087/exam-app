@@ -1,7 +1,6 @@
 import 'package:exam_app/config/di/di.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/theme/app_theme.dart';
-import 'package:exam_app/core/utils/dialog_utils.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/view_model/cubit/forget_password_cubit.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/view_model/states/forget_password_state.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResetPasswordView extends StatelessWidget {
   static const String routeName = 'reset-password';
+
   ResetPasswordView({super.key});
 
   final TextEditingController newPasswordController = TextEditingController();
@@ -17,7 +17,6 @@ class ResetPasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final email = ModalRoute.of(context)!.settings.arguments as String;
     final ForgotPasswordCubit cubit = getIt.get<ForgotPasswordCubit>();
 
@@ -86,14 +85,18 @@ class ResetPasswordView extends StatelessWidget {
                 listener: (context, state) {
                   if (!state.resetPasswordState.isLoading) {
                     if (state.resetPasswordState.msg != null) {
-                      DialogUtils.showMessage(
-                        context,
-                        message: state.resetPasswordState.msg!,
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(state.resetPasswordState.msg!),
+                          duration: Duration(seconds: 2),
+                        ),
                       );
                     } else if (state.resetPasswordState.data != null) {
-                      DialogUtils.showMessage(
-                        context,
-                        message: "Password reset successful",
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Password reset successful"),
+                          duration: Duration(seconds: 2),
+                        ),
                       );
                       Navigator.pushNamed(context, 'sign-in');
                     }
@@ -114,9 +117,11 @@ class ResetPasswordView extends StatelessWidget {
                                   .trim();
 
                               if (newPassword != confirmPassword) {
-                                DialogUtils.showMessage(
-                                  context,
-                                  message: "Passwords do not match",
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Passwords do not match"),
+                                    duration: Duration(seconds: 2),
+                                  ),
                                 );
                                 return;
                               }
@@ -124,7 +129,7 @@ class ResetPasswordView extends StatelessWidget {
                               cubit.resetPassword(
                                 newPassword: newPassword,
                                 confirmPassword: confirmPassword,
-                                email: email
+                                email: email,
                               );
                             },
                       style: ElevatedButton.styleFrom(

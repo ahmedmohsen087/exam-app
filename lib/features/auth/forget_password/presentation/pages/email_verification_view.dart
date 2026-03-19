@@ -1,16 +1,13 @@
 import 'package:exam_app/config/di/di.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/theme/app_theme.dart';
-import 'package:exam_app/core/utils/dialog_utils.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/view_model/cubit/forget_password_cubit.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/view_model/states/forget_password_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class EmailVerificationView extends StatelessWidget {
   static const String routeName = 'email-verification';
-
 
   EmailVerificationView({super.key});
 
@@ -70,7 +67,8 @@ class EmailVerificationView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(
                   6,
-                  (index) => Expanded(child: _buildOtpBox(otpControllers[index])),
+                  (index) =>
+                      Expanded(child: _buildOtpBox(otpControllers[index])),
                 ),
               ),
 
@@ -80,9 +78,11 @@ class EmailVerificationView extends StatelessWidget {
                 listener: (context, state) {
                   if (!state.verifyCodeState.isLoading) {
                     if (state.verifyCodeState.msg != null) {
-                      DialogUtils.showMessage(
-                        context,
-                        message: state.verifyCodeState.msg!,
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(state.verifyCodeState.msg!),
+                          duration: Duration(seconds: 2),
+                        ),
                       );
                     } else if (state.verifyCodeState.data != null) {
                       Navigator.pushNamed(
