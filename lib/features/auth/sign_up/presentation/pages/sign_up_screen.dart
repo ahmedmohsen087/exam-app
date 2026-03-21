@@ -4,6 +4,7 @@ import 'package:exam_app/core/theme/app_theme.dart';
 import 'package:exam_app/features/Home/presentation/pages/home_screen.dart';
 import 'package:exam_app/features/auth/sign_in/presentation/pages/sign_in_screen.dart';
 import 'package:exam_app/features/auth/sign_up/presentation/view_model/cubit/sign_up_cubit.dart';
+import 'package:exam_app/features/auth/sign_up/presentation/view_model/events/sign_up_event.dart';
 import 'package:exam_app/features/auth/sign_up/presentation/view_model/states/sign_up_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -166,14 +167,16 @@ class SignUpScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          _signUpCubit.signUp(
-                            userNameController.text,
-                            firstNameController.text,
-                            lastNameController.text,
-                            emailController.text,
-                            passwordController.text,
-                            confirmPasswordController.text,
-                            phoneNumberController.text,
+                          _signUpCubit.doEvent(
+                            SignUpEvent(
+                              username: userNameController.text,
+                              password: passwordController.text,
+                              firstName: firstNameController.text,
+                              lastName: lastNameController.text,
+                              email: emailController.text,
+                              rePassword: confirmPasswordController.text,
+                              phone: phoneNumberController.text,
+                            ),
                           );
                         }
                       },

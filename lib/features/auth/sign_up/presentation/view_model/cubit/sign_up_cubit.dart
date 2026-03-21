@@ -3,6 +3,7 @@ import 'package:exam_app/config/base_response/base_response.dart';
 import 'package:exam_app/config/base_state/base_state.dart';
 import 'package:exam_app/features/auth/sign_up/domain/entities/user.dart';
 import 'package:exam_app/features/auth/sign_up/domain/use_cases/sign_up_use_case.dart';
+import 'package:exam_app/features/auth/sign_up/presentation/view_model/events/sign_up_event.dart';
 import 'package:exam_app/features/auth/sign_up/presentation/view_model/states/sign_up_state.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,7 +13,19 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   SignUpUseCase _signUpUseCase;
 
-  Future<void> signUp(
+  void doEvent(SignUpEvent event) {
+    _signUp(
+      event.username,
+      event.firstName,
+      event.lastName,
+      event.email,
+      event.password,
+      event.rePassword,
+      event.phone,
+    );
+  }
+
+  Future<void> _signUp(
     String username,
     String firstName,
     String lastName,
