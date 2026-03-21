@@ -4,6 +4,7 @@ import 'package:exam_app/core/theme/app_theme.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/pages/forget_password_view.dart';
 import 'package:exam_app/features/auth/sign_in/presentation/view_model/States/sign_in_state.dart';
 import 'package:exam_app/features/auth/sign_in/presentation/view_model/cubit/sign_in_view_model.dart';
+import 'package:exam_app/features/auth/sign_in/presentation/view_model/events/sign_in_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -96,15 +97,16 @@ class SignInScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          _signInViewModel.signIn(
-                            emailController.text,
-                            passwordController.text,
+                          _signInViewModel.doEvent(
+                            SignInEvent(
+                              emailController.text,
+                              passwordController.text,
+                            ),
                           );
                         }
                       },
                       child: BlocConsumer<SignInViewModel, SignInState>(
                         builder: (context, state) {
-                          print("listener: ${state.api1State.msg}");
                           if (state.api1State.isLoading == true) {
                             return Center(child: CircularProgressIndicator());
                           } else {
