@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/view_model/events/forget_password_events.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/view_model/states/forget_password_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:exam_app/config/base_response/base_response.dart';
@@ -26,7 +26,6 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     this._resetPasswordUseCase,
   ) : super(ForgotPasswordState());
 
-  // 🔥 MVI entry point (Event Dispatcher)
   Future<void> onEvent(ForgetPasswordEvents event) async {
     if (event is SendEmailEvent) {
       await _sendEmail(event.email);
@@ -86,7 +85,6 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   }
 
   Future<void> _resetPassword(ResetPasswordEvent event) async {
-    // validation first
     if (event.newPassword != event.confirmPassword) {
       emit(
         state.copyWith(

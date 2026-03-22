@@ -1,5 +1,7 @@
 sealed class ForgetPasswordEvents {}
 
+class StartResendTimerEvent extends ForgetPasswordEvents {}
+
 class SendEmailEvent extends ForgetPasswordEvents {
   final String email;
 
