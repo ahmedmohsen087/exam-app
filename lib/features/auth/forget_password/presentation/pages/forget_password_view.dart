@@ -2,6 +2,7 @@ import 'package:exam_app/config/di/di.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/theme/app_theme.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/view_model/cubit/forget_password_cubit.dart';
+import 'package:exam_app/features/auth/forget_password/presentation/view_model/events/forget_password_events.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/view_model/states/forget_password_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -97,8 +98,10 @@ class ForgetPasswordView extends StatelessWidget {
                       onPressed: state.forgotPasswordState.isLoading
                           ? null
                           : () {
-                              context.read<ForgotPasswordCubit>().sendEmail(
-                                emailController.text.trim(),
+                              context.read<ForgotPasswordCubit>().onEvent(
+                                SendEmailEvent(
+                                  email: emailController.text.trim(),
+                                ),
                               );
                             },
                       style: ElevatedButton.styleFrom(

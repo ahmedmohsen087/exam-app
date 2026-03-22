@@ -1,14 +1,18 @@
 import 'package:bloc/bloc.dart';
+import 'package:exam_app/features/auth/forget_password/presentation/view_model/events/forget_password_events.dart';
+import 'package:exam_app/features/auth/forget_password/presentation/view_model/states/forget_password_state.dart';
+import 'package:injectable/injectable.dart';
+
 import 'package:exam_app/config/base_response/base_response.dart';
 import 'package:exam_app/config/base_state/base_state.dart';
+
 import 'package:exam_app/features/auth/forget_password/domain/entities/forgot_password_entity.dart';
 import 'package:exam_app/features/auth/forget_password/domain/entities/reset_password_entity.dart';
 import 'package:exam_app/features/auth/forget_password/domain/entities/verify_reset_code_entity.dart';
+
 import 'package:exam_app/features/auth/forget_password/domain/usecases/forget_password_use_case.dart';
 import 'package:exam_app/features/auth/forget_password/domain/usecases/reset_password_use_case.dart';
 import 'package:exam_app/features/auth/forget_password/domain/usecases/verify_reset_code_use_case.dart';
-import 'package:exam_app/features/auth/forget_password/presentation/view_model/states/forget_password_state.dart';
-import 'package:injectable/injectable.dart';
 
 @injectable
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
@@ -22,14 +26,21 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     this._resetPasswordUseCase,
   ) : super(ForgotPasswordState());
 
-  Future<void> sendEmail(String email) async {
+  // 🔥 MVI entry point (Event Dispatcher)
+  Future<void> onEvent(ForgetPasswordEvents event) async {
+    if (event is SendEmailEvent) {
+      await _sendEmail(event.email);
+    } else if (event is VerifyResetCodeEvent) {
+      await _verifyResetCode(event.resetCode);
+    } else if (event is ResetPasswordEvent) {
+      await _resetPassword(event);
+    }
+  }
+
+  Future<void> _sendEmail(String email) async {
     emit(
       state.copyWith(
-        forgotPasswordState: BaseState<ForgotPasswordEntity?>(
-          isLoading: true,
-          data: null,
-          msg: null,
-        ),
+        forgotPasswordState: BaseState<ForgotPasswordEntity?>(isLoading: true),
       ),
     );
 
@@ -38,34 +49,22 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     if (response is Success<ForgotPasswordEntity>) {
       emit(
         state.copyWith(
-          forgotPasswordState: BaseState<ForgotPasswordEntity?>(
-            isLoading: false,
-            data: response.data,
-            msg: null,
-          ),
+          forgotPasswordState: BaseState(isLoading: false, data: response.data),
         ),
       );
     } else if (response is Failed<ForgotPasswordEntity>) {
       emit(
         state.copyWith(
-          forgotPasswordState: BaseState<ForgotPasswordEntity?>(
-            isLoading: false,
-            data: null,
-            msg: response.msg,
-          ),
+          forgotPasswordState: BaseState(isLoading: false, msg: response.msg),
         ),
       );
     }
   }
 
-  Future<void> verifyResetCode(String code) async {
+  Future<void> _verifyResetCode(String code) async {
     emit(
       state.copyWith(
-        verifyCodeState: BaseState<VerifyResetCodeEntity?>(
-          isLoading: true,
-          data: null,
-          msg: null,
-        ),
+        verifyCodeState: BaseState<VerifyResetCodeEntity?>(isLoading: true),
       ),
     );
 
@@ -74,47 +73,25 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     if (response is Success<VerifyResetCodeEntity>) {
       emit(
         state.copyWith(
-          verifyCodeState: BaseState<VerifyResetCodeEntity?>(
-            isLoading: false,
-            data: response.data,
-            msg: null,
-          ),
+          verifyCodeState: BaseState(isLoading: false, data: response.data),
         ),
       );
     } else if (response is Failed<VerifyResetCodeEntity>) {
       emit(
         state.copyWith(
-          verifyCodeState: BaseState<VerifyResetCodeEntity?>(
-            isLoading: false,
-            data: null,
-            msg: response.msg,
-          ),
+          verifyCodeState: BaseState(isLoading: false, msg: response.msg),
         ),
       );
     }
   }
 
-  Future<void> resetPassword({
-    required String newPassword,
-    required String confirmPassword,
-    required String email,
-  }) async {
-    emit(
-      state.copyWith(
-        resetPasswordState: BaseState<ResetPasswordEntity?>(
-          isLoading: true,
-          data: null,
-          msg: null,
-        ),
-      ),
-    );
-
-    if (newPassword != confirmPassword) {
+  Future<void> _resetPassword(ResetPasswordEvent event) async {
+    // validation first
+    if (event.newPassword != event.confirmPassword) {
       emit(
         state.copyWith(
           resetPasswordState: BaseState<ResetPasswordEntity?>(
             isLoading: false,
-            data: null,
             msg: "Passwords do not match",
           ),
         ),
@@ -122,29 +99,27 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
       return;
     }
 
+    emit(
+      state.copyWith(
+        resetPasswordState: BaseState<ResetPasswordEntity?>(isLoading: true),
+      ),
+    );
+
     final response = await _resetPasswordUseCase(
-      newPassword: newPassword,
-      email: email,
+      newPassword: event.newPassword,
+      email: event.email,
     );
 
     if (response is Success<ResetPasswordEntity>) {
       emit(
         state.copyWith(
-          resetPasswordState: BaseState<ResetPasswordEntity?>(
-            isLoading: false,
-            data: response.data,
-            msg: null,
-          ),
+          resetPasswordState: BaseState(isLoading: false, data: response.data),
         ),
       );
     } else if (response is Failed<ResetPasswordEntity>) {
       emit(
         state.copyWith(
-          resetPasswordState: BaseState<ResetPasswordEntity?>(
-            isLoading: false,
-            data: null,
-            msg: response.msg,
-          ),
+          resetPasswordState: BaseState(isLoading: false, msg: response.msg),
         ),
       );
     }

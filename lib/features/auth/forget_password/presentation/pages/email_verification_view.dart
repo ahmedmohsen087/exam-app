@@ -2,19 +2,18 @@ import 'package:exam_app/config/di/di.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/theme/app_theme.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/view_model/cubit/forget_password_cubit.dart';
+import 'package:exam_app/features/auth/forget_password/presentation/view_model/events/forget_password_events.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/view_model/states/forget_password_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pinput/pinput.dart'; // استدعاء الباكيج
 
 class EmailVerificationView extends StatelessWidget {
   static const String routeName = 'email-verification';
 
   EmailVerificationView({super.key});
 
-  final List<TextEditingController> otpControllers = List.generate(
-    6,
-    (_) => TextEditingController(),
-  );
+  final TextEditingController otpController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -63,13 +62,40 @@ class EmailVerificationView extends StatelessWidget {
               ),
               const SizedBox(height: 40),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(
-                  6,
-                  (index) =>
-                      Expanded(child: _buildOtpBox(otpControllers[index])),
+              // استخدام Pinput بدل الـ Row
+              Pinput(
+                length: 6,
+                controller: otpController,
+                defaultPinTheme: PinTheme(
+                  width: 65,
+                  height: 65,
+                  textStyle: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE8EFFF),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
+                focusedPinTheme: PinTheme(
+                  width: 65,
+                  height: 65,
+                  textStyle: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: AppColors.blue),
+                  ),
+                ),
+                onCompleted: (pin) {
+                  // ممكن تحط أي كود هنا لو حابب يتم الضغط تلقائي
+                },
               ),
 
               const SizedBox(height: 40),
@@ -81,7 +107,7 @@ class EmailVerificationView extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(state.verifyCodeState.msg!),
-                          duration: Duration(seconds: 2),
+                          duration: const Duration(seconds: 2),
                         ),
                       );
                     } else if (state.verifyCodeState.data != null) {
@@ -101,10 +127,11 @@ class EmailVerificationView extends StatelessWidget {
                       onPressed: state.verifyCodeState.isLoading
                           ? null
                           : () {
-                              final code = otpControllers
-                                  .map((c) => c.text)
-                                  .join();
-                              cubit.verifyResetCode(code);
+                              final code = otpController.text;
+
+                              context.read<ForgotPasswordCubit>().onEvent(
+                                VerifyResetCodeEvent(resetCode: code),
+                              );
                             },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.blue,
@@ -126,37 +153,6 @@ class EmailVerificationView extends StatelessWidget {
                 },
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildOtpBox(TextEditingController controller) {
-    return Container(
-      height: 65,
-      width: 65,
-      decoration: BoxDecoration(
-        color: const Color(0xFFE8EFFF),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Center(
-        child: TextField(
-          controller: controller,
-          textAlign: TextAlign.center,
-          keyboardType: TextInputType.number,
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-          decoration: const InputDecoration(
-            isDense: true,
-            contentPadding: EdgeInsets.zero,
-            border: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            counterText: "",
           ),
         ),
       ),
