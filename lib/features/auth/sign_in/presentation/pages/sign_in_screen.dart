@@ -119,9 +119,8 @@ class SignInScreen extends StatelessWidget {
                         listener: (context, state) {
                           if (state.api1State.isLoading == false &&
                               state.api1State.msg == null) {
-                            Navigator.of(context).pushNamedAndRemoveUntil(
+                            Navigator.of(context).pushNamed(
                               HomeScreen.routeName,
-                              (route) => false,
                             );
                           } else if (state.api1State.isLoading == false &&
                               state.api1State.msg != null) {

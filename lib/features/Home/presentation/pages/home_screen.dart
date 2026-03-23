@@ -1,9 +1,34 @@
+import 'package:exam_app/config/secure_storage/secure_storage_service.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const String routeName = 'Home Screen';
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String? hashToken;
+
+  @override
+  void initState() {
+    SecureStorageService.token.then((value) {
+      setState(() {
+        hashToken = value;
+      });
+      print("hashToken is $hashCode");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return Scaffold(
+      body: Center(
+        child: hashToken == null
+            ? CircularProgressIndicator(color: Colors.black)
+            : Text(hashToken!, style: TextStyle(color: Colors.black)),
+      ),
+    );
   }
 }
