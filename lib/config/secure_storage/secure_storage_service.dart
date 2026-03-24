@@ -14,5 +14,4 @@ abstract class SecureStorageService {
   static Future<String?> readToken() async {
     return await storage.read(key: SecureStorageKeys.token);
   }
-
 }

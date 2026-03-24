@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:exam_app/config/base_response/base_response.dart';
+import 'package:exam_app/config/secure_storage/secure_storage_service.dart';
 import 'package:exam_app/features/auth/sign_up/api/client/sign_up_client.dart';
 import 'package:exam_app/features/auth/sign_up/data/data_sources/sign_up_remote_data_source.dart';
 import 'package:exam_app/features/auth/sign_up/data/models/user_dto.dart';
@@ -31,6 +32,7 @@ class SignUpRemoteDataSourceImp extends SignUpRemoteDataSource {
         rePassword,
         phone,
       );
+      await SecureStorageService.writeToken(response.token);
       return Success<UserDto>(data: response.user);
     } on DioException catch (e) {
       return Failed<UserDto>(msg: e.response?.data["message"]);
