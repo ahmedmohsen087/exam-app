@@ -5,14 +5,14 @@ import 'package:exam_app/features/auth/forget_password/presentation/pages/forget
 import 'package:exam_app/features/auth/sign_in/presentation/view_model/States/sign_in_state.dart';
 import 'package:exam_app/features/auth/sign_in/presentation/view_model/cubit/sign_in_view_model.dart';
 import 'package:exam_app/features/auth/sign_in/presentation/view_model/events/sign_in_event.dart';
+import 'package:exam_app/features/sprint-two/home_screen/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/validators.dart';
-import '../../../../Home/presentation/pages/home_screen.dart';
 
 class SignInScreen extends StatelessWidget {
-  SignInViewModel _signInViewModel = getIt<SignInViewModel>();
+  final SignInViewModel _signInViewModel = getIt<SignInViewModel>();
   static const String routeName = 'sign-in';
 
   SignInScreen({super.key});
@@ -119,9 +119,9 @@ class SignInScreen extends StatelessWidget {
                         listener: (context, state) {
                           if (state.api1State.isLoading == false &&
                               state.api1State.msg == null) {
-                            Navigator.of(context).pushNamed(
-                              HomeScreen.routeName,
-                            );
+                            Navigator.of(
+                              context,
+                            ).pushNamed(HomeScreen.routeName);
                           } else if (state.api1State.isLoading == false &&
                               state.api1State.msg != null) {
                             ScaffoldMessenger.of(context).showSnackBar(
