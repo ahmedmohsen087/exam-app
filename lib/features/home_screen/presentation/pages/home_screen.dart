@@ -1,6 +1,7 @@
 import 'package:exam_app/config/secure_storage/secure_storage_service.dart';
-import 'package:exam_app/features/sprint-two/exam_details/presentation/pages/exam_details_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../../exam_details/presentation/pages/exam_details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = 'Home Screen';
@@ -18,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         hashToken = value;
       });
-      print("hashToken is $hashCode");
     });
   }
 
@@ -28,13 +28,16 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, ExamDetailsScreen.routeName);
+            Navigator.pushNamed(
+              context,
+              ExamDetailsScreen.routeName,
+              arguments: {
+                ExamDetailsScreen.argSubjectId: "670037f6728c92b7fdf434fc",
+              },
+            );
           },
           child: Text('Go To Exam Details'),
         ),
-        // child: hashToken == null
-        //     ? CircularProgressIndicator(color: Colors.black)
-        //     : Text(hashToken!, style: TextStyle(color: Colors.black)),
       ),
     );
   }

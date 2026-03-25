@@ -1,9 +1,10 @@
-import 'package:exam_app/features/sprint-two/exam_page/presentation/pages/exam_page_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
+import '../../../exam_page/presentation/pages/exam_questions_page_screen.dart';
 
 class StartExamScreen extends StatelessWidget {
   static const String routeName = 'Start Exam Screen';
+
   const StartExamScreen({super.key});
 
   @override
@@ -12,7 +13,13 @@ class StartExamScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, ExamPageScreen.routeName);
+            Navigator.pushNamed(
+              context,
+              ExamQuestionsPageScreen.routeName,
+              arguments: {
+                ExamQuestionsPageScreen.argExamId: "670070a830a3c3c1944a9c63",
+              },
+            );
           },
           child: Text('Go To Exam Page'),
         ),
