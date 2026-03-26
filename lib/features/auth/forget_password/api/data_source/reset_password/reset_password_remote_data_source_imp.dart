@@ -20,18 +20,13 @@ class ResetPasswordRemoteDataSourceImpl
     required String email
   }) async {
     try {
-
       final response = await client.resetPassword({
         'newPassword': newPassword,
         'email': email,
       });
       return Success<ResetPasswordResponse>(data: response);
-    } on DioException catch (e) {
-      return Failed<ResetPasswordResponse>(
-        msg: e.response?.data['message'] ?? e.message,
-      );
     } catch (e) {
-      return Failed<ResetPasswordResponse>(msg: "Something went wrong");
+      return Failed<ResetPasswordResponse>(error: e);
     }
   }
 }

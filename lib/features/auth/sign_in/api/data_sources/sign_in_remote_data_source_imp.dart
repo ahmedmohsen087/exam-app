@@ -18,7 +18,7 @@ class SignInRemoteDataSourceImp extends SignInRemoteDataSource {
       await SecureStorageService.writeToken(signInResponse.token);
       return Success<UserDTO>(data: signInResponse.user);
     } catch (e) {
-      return Failed<UserDTO>(msg: e.toString());
+      return Failed<UserDTO>(error: e);
     }
   }
 }
