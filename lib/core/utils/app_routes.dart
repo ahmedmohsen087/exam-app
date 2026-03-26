@@ -7,7 +7,7 @@ import '../../features/auth/sign_in/presentation/pages/sign_in_screen.dart';
 import '../../features/auth/sign_up/presentation/pages/sign_up_screen.dart';
 import '../../features/exam_details/presentation/pages/exam_details_screen.dart';
 import '../../features/exam_details/presentation/pages/start_exam_screen.dart';
-import '../../features/exam_page/presentation/pages/exam_questions_page_screen.dart';
+import '../../features/exam_questions/presentation/pages/exam_questions_page_screen.dart';
 import '../../features/home_screen/presentation/pages/home_screen.dart';
 
 class AppRoutes {

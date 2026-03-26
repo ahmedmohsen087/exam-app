@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../exam_page/presentation/pages/exam_questions_page_screen.dart';
+import '../../../exam_questions/presentation/pages/exam_questions_page_screen.dart';
 
 class StartExamScreen extends StatelessWidget {
   static const String routeName = 'Start Exam Screen';
