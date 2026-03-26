@@ -11,6 +11,17 @@ abstract class DioModule {
         baseUrl: Endpoints.baseUrl,
         connectTimeout: const Duration(seconds: 30),
         receiveTimeout: const Duration(seconds: 30),
+
+      ),
+    );
+
+    dio.interceptors.add(
+      LogInterceptor(
+        requestBody: true,
+        request: true,
+        requestHeader: true,
+        responseBody: true,
+        responseHeader: true,
       ),
     );
 

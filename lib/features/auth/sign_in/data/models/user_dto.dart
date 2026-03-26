@@ -1,11 +1,10 @@
-
+import 'package:exam_app/features/auth/sign_in/domain/entities/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'user.g.dart';
+part 'user_dto.g.dart';
 
 @JsonSerializable()
-class User {
-
+class UserDTO {
   @JsonKey(name: "_id")
   String? id;
 
@@ -33,7 +32,7 @@ class User {
   @JsonKey(name: "createdAt")
   String? createdAt;
 
-  User({
+  UserDTO({
     this.id,
     this.username,
     this.firstName,
@@ -45,8 +44,22 @@ class User {
     this.createdAt,
   });
 
-  factory User.fromJson(Map<String, dynamic> json)
-      => _$UserFromJson(json);
+  factory UserDTO.fromJson(Map<String, dynamic> json) =>
+      _$UserDTOFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserToJson(this);
+  Map<String, dynamic> toJson() => _$UserDTOToJson(this);
+
+  User toUserEntity() {
+    return User(
+      id: id,
+      username: username,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
+      role: role,
+      isVerified: isVerified,
+      createdAt: createdAt,
+    );
+  }
 }

@@ -1,6 +1,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
-import '../user.dart';
+import '../user_dto.dart';
 
 part 'sign_in_response.g.dart';
 
@@ -14,7 +14,7 @@ class SignInResponse {
   String? token;
 
   @JsonKey(name: "user")
-  User? user;
+  UserDTO? user;
 
   SignInResponse({
     this.message,
