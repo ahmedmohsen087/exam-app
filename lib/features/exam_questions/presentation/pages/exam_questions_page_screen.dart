@@ -1,4 +1,9 @@
+import 'package:exam_app/config/di/di.dart';
+import 'package:exam_app/features/exam_questions/presentation/view_model/cubit/questions_cubit.dart';
+import 'package:exam_app/features/exam_questions/presentation/view_model/event/questions_event.dart';
+import 'package:exam_app/features/exam_questions/presentation/view_model/state/question_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ExamQuestionsPageScreen extends StatelessWidget {
   static const String routeName = 'Exam Page Screen';
@@ -13,6 +18,57 @@ class ExamQuestionsPageScreen extends StatelessWidget {
         ModalRoute.of(context)?.settings.arguments as Map<String, String>?;
     final String examId = args?[argExamId] ?? 'No ID';
     print("examID : $examId");
-    return Scaffold(body: Center(child: Text('Exam Page')));
+    return Scaffold(
+      appBar: AppBar(),
+      body: BlocProvider<QuestionsCubit>(
+        create: (context) => getIt<QuestionsCubit>()
+          ..doEvent(
+            GetAllQuestionsOnExamEvent(
+              token:
+                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YWM2ZDkyY2ViMmM1OWY4NGEzYzg4YyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc0NjE3MTY0fQ.5vTrWWcmqm-FGQOidMCegKeALafp0RL5l9c2fyChhe0",
+              examId: examId,
+            ),
+          ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: BlocConsumer<QuestionsCubit, QuestionState>(
+            builder: (context, state) {
+              if (state.questionsApi.isLoading) {
+                return Center(
+                  child: CircularProgressIndicator(color: Colors.black),
+                );
+              }
+              if (state.questionsApi.msg != null) {
+                return Center(child: Text(state.questionsApi.msg!));
+              }
+
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        "Done",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+            listener: (context, state) {
+              if (state.questionsApi.msg != null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.questionsApi.msg!),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              }
+            },
+          ),
+        ),
+      ),
+    );
   }
 }
