@@ -67,6 +67,11 @@ class AppTheme {
         fontSize: 13,
         color: AppColors.black,
       ),
+      labelMedium: TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 18,
+        color: AppColors.black,
+      ),
     ),
   );
 }

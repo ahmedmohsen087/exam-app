@@ -1,34 +1,59 @@
-import 'package:exam_app/config/secure_storage/secure_storage_service.dart';
+import 'package:exam_app/core/theme/app_colors.dart';
+import 'package:exam_app/features/Home/presentation/pages/profile_screen.dart';
+import 'package:exam_app/features/Home/presentation/pages/result_screen.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
+import 'explore_screen.dart';
+
+class HomeScreen extends StatelessWidget {
   static const String routeName = 'Home Screen';
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+   HomeScreen({super.key});
+  int selectedIndex = 0;
+  List<Widget> tabs = [
+    ExploreScreen(),
+    ResultScreen(),
+    ProfileScreen(),
 
-class _HomeScreenState extends State<HomeScreen> {
-  String? hashToken;
-
-  @override
-  void initState() {
-    SecureStorageService.token.then((value) {
-      setState(() {
-        hashToken = value;
-      });
-      print("hashToken is $hashCode");
-    });
-  }
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: hashToken == null
-            ? CircularProgressIndicator(color: Colors.black)
-            : Text(hashToken!, style: TextStyle(color: Colors.black)),
+      appBar: AppBar(
+        title: Text(
+          'Survey',
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            color: AppColors.blue,
+            fontWeight: FontWeight.bold, // optional
+          ),
+        ),
+        centerTitle: false, // aligns to left
+        backgroundColor: AppColors.white, // optional, depends on your theme
+        elevation: 0, // optional, removes shadow
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColors.white,
+          onTap: (index){
+            selectedIndex = index;
+          },
+          currentIndex: selectedIndex,
+          items:[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Explore',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Result',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ]
+      ),
+      body: tabs[selectedIndex],
     );
   }
 }
