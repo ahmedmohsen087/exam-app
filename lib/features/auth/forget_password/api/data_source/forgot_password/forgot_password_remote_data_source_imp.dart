@@ -21,15 +21,8 @@ class ForgotPasswordRemoteDataSourceImp
         'email': email,
       });
       return Success<ForgotPasswordResponse>(data: response);
-    } on DioException catch (e) {
-      print("Dio Error: ${e.message}");
-      print("Response Data: ${e.response?.data}");
-      return Failed<ForgotPasswordResponse>(
-        msg: e.response?.data['message']?.toString() ?? e.message,
-      );
-    } catch (e) {
-      print("Unknown Error: $e");
-      return Failed<ForgotPasswordResponse>(msg: "Something went wrong");
+    } catch(e){
+      return Failed<ForgotPasswordResponse>(error: e);
     }
   }
 }

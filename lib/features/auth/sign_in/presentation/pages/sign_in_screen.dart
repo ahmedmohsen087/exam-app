@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/utils/validators.dart';
-import '../../../../Home/presentation/pages/home_screen.dart';
+import '../../../../home_screen/presentation/pages/home_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   final SignInViewModel _signInViewModel = getIt<SignInViewModel>();
@@ -129,9 +129,9 @@ class SignInScreen extends StatelessWidget {
                         listener: (context, state) {
                           if (state.api1State.isLoading == false &&
                               state.api1State.msg == null) {
-                            Navigator.of(context).pushNamed(
-                              HomeScreen.routeName,
-                            );
+                            Navigator.of(
+                              context,
+                            ).pushNamed(HomeScreen.routeName);
                           } else if (state.api1State.isLoading == false &&
                               state.api1State.msg != null) {
                             ScaffoldMessenger.of(context).showSnackBar(

@@ -1,7 +1,6 @@
 import 'package:exam_app/config/di/di.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/theme/app_theme.dart';
-import 'package:exam_app/features/Home/presentation/pages/home_screen.dart';
 import 'package:exam_app/features/auth/sign_in/presentation/pages/sign_in_screen.dart';
 import 'package:exam_app/features/auth/sign_up/presentation/view_model/cubit/sign_up_cubit.dart';
 import 'package:exam_app/features/auth/sign_up/presentation/view_model/events/sign_up_event.dart';
@@ -10,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/validators.dart';
+import '../../../../home_screen/presentation/pages/home_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpCubit _signUpCubit = getIt.get<SignUpCubit>();
