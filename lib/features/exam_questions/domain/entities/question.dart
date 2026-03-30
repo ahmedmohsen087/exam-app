@@ -1,13 +1,15 @@
-import '../../data/models/answer.dart';
+
+import 'package:exam_app/features/exam_questions/domain/entities/question_type.dart';
+
 import '../../data/models/exam.dart';
+import 'answer.dart';
 
 class Question {
   List<Answer>? answers;
-  String? type;
+  QuestionType? type;
   String? id;
   String? question;
   String? correct;
-  dynamic subject;
   Exam? exam;
   String? createdAt;
 
@@ -17,7 +19,6 @@ class Question {
     this.id,
     this.question,
     this.correct,
-    this.subject,
     this.exam,
     this.createdAt,
   });

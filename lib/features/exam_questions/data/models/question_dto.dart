@@ -1,7 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../domain/entities/answer.dart';
 import '../../domain/entities/question.dart';
-import 'answer.dart';
+
+import '../../domain/entities/question_type.dart';
 import 'exam.dart';
 
 part 'question_dto.g.dart';
@@ -56,8 +58,7 @@ class QuestionDto {
       correct: correct,
       exam: exam,
       question: question,
-      subject: subject,
-      type: type,
+      type: QuestionType.fromApi(type!),
     );
   }
 }
