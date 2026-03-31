@@ -73,6 +73,17 @@ import '../../features/auth/sign_up/domain/use_cases/sign_up_use_case.dart'
     as _i45;
 import '../../features/auth/sign_up/presentation/view_model/cubit/sign_up_cubit.dart'
     as _i667;
+import '../../features/Home/api/data_source/home_remote_data_source_impl.dart'
+    as _i386;
+import '../../features/Home/api/home_api_client/home_api_client.dart' as _i556;
+import '../../features/Home/data/data_sources/home_remote_data_source_contract.dart'
+    as _i337;
+import '../../features/Home/data/repo/home_repo_impl.dart' as _i759;
+import '../../features/Home/domain/repo/home_repo_contract.dart' as _i797;
+import '../../features/Home/domain/use_cases/get_all_subjects_use_cases.dart'
+    as _i29;
+import '../../features/Home/presentation/view_model/cubit/home_screen_view_model.dart'
+    as _i974;
 import 'modules/dio_module.dart' as _i983;
 import 'modules/secure_storage_module.dart' as _i590;
 
@@ -113,8 +124,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i45.SignUpUseCase>(
       () => _i45.SignUpUseCase(gh<_i924.SignUpRepo>()),
     );
+    gh.factory<_i337.HomeRemoteDataSourceContract>(
+      () => _i386.HomeRemoteDataSourceImpl(gh<_i556.HomeApiClient>()),
+    );
     gh.factory<_i528.SignInRemoteDataSource>(
       () => _i530.SignInRemoteDataSourceImp(gh<_i739.SignInClient>()),
+    );
+    gh.factory<_i797.HomeRepoContract>(
+      () => _i759.HomeRepoImpl(gh<_i337.HomeRemoteDataSourceContract>()),
     );
     gh.factory<_i740.VerifyResetCodeRepo>(
       () => _i891.VerifyResetCodeRepoImpl(
@@ -133,6 +150,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i430.VerifyResetCodeUseCase>(
       () => _i430.VerifyResetCodeUseCase(gh<_i740.VerifyResetCodeRepo>()),
+    );
+    gh.factory<_i29.GetAllSubjectsUseCases>(
+      () => _i29.GetAllSubjectsUseCases(gh<_i797.HomeRepoContract>()),
+    );
+    gh.factory<_i974.HomeScreenViewModel>(
+      () => _i974.HomeScreenViewModel(gh<_i29.GetAllSubjectsUseCases>()),
     );
     gh.factory<_i737.ForgotPasswordUseCase>(
       () => _i737.ForgotPasswordUseCase(gh<_i924.ForgetPasswordRepo>()),

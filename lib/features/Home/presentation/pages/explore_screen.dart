@@ -1,14 +1,18 @@
+import 'package:exam_app/features/Home/presentation/view_model/cubit/home_screen_view_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../config/di/di.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../widget/explore_search_bar.dart';
+import '../../../Home/presentation/widget/explore_search_bar.dart';
 
 class ExploreScreen extends StatelessWidget {
-  const ExploreScreen({super.key});
+   ExploreScreen({super.key});
+HomeScreenViewModel homeScreenViewModel = getIt<HomeScreenViewModel>();
 
   @override
   Widget build(BuildContext context) {
+    homeScreenViewModel.getAllSubjects();
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Padding(
