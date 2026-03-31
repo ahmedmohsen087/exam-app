@@ -1,4 +1,1 @@
-abstract class AppParam {
-
-
-}
+abstract class AppParam {}

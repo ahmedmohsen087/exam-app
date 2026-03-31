@@ -12,7 +12,7 @@ abstract class ExamDetailsClient {
   @factoryMethod
   factory ExamDetailsClient(Dio dio) = _ExamDetailsClient;
 
-  @GET("/exams")
+  @GET(Endpoints.getSubjectExams)
   Future<ExamDetailsResponse> getSubjectExams(
     @Header("token") String token,
     @Query("subject") String subjectId,
