@@ -1,6 +1,7 @@
 import 'package:exam_app/config/secure_storage/secure_storage_service.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/values/app_param.dart';
 import '../../../exam_details/presentation/pages/exam_details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
               context,
               ExamDetailsScreen.routeName,
               arguments: {
-                ExamDetailsScreen.argSubjectId: "670037f6728c92b7fdf434fc",
+                AppParam.subjectId: "670037f6728c92b7fdf434fc",
               },
             );
           },

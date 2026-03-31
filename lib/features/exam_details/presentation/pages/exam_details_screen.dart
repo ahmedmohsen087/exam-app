@@ -1,10 +1,11 @@
 import 'package:exam_app/features/exam_details/presentation/pages/start_exam_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/values/app_param.dart';
+
 class ExamDetailsScreen extends StatelessWidget {
   static const String routeName = 'Exam Details Screen';
 
-  static const String argSubjectId = 'subjectId';
 
   const ExamDetailsScreen({super.key});
 
@@ -12,7 +13,7 @@ class ExamDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, String>?;
-    final String subjectId = args?[argSubjectId] ?? 'No ID';
+    final String subjectId = args?[AppParam.subjectId] ?? 'No ID';
     print("SubjectID : $subjectId");
 
     return Scaffold(
