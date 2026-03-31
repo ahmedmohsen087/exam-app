@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/values/app_param.dart';
 import '../../../exam_questions/presentation/pages/exam_questions_page_screen.dart';
 
 class StartExamScreen extends StatelessWidget {
@@ -16,9 +17,7 @@ class StartExamScreen extends StatelessWidget {
             Navigator.pushNamed(
               context,
               ExamQuestionsPageScreen.routeName,
-              arguments: {
-                ExamQuestionsPageScreen.argExamId: "670070a830a3c3c1944a9c63",
-              },
+              arguments: {AppParam.examId: "670070a830a3c3c1944a9c63"},
             );
           },
           child: Text('Go To Exam Page'),
