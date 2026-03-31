@@ -5,6 +5,7 @@ import '../../../exam_questions/presentation/pages/exam_questions_page_screen.da
 
 class StartExamScreen extends StatelessWidget {
   static const String routeName = 'Start Exam Screen';
+  static const String argExamId = '670037f6728c92b7fdf434fc';
 
   const StartExamScreen({super.key});
 
