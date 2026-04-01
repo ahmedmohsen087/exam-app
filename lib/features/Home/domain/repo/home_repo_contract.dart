@@ -2,6 +2,6 @@ import '../entities/subjects_models.dart';
 
 abstract class HomeRepoContract {
 
-  Future <List<SubjectsModels>> getAllSubjects() ;
+  Future <List<SubjectsModels>> getAllSubjects({String? token,}) ;
 
 }

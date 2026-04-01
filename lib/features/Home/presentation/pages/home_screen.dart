@@ -5,6 +5,7 @@ import 'package:exam_app/features/Home/presentation/pages/result_screen.dart';
 
 import 'package:flutter/material.dart';
 
+import '../../../../core/values/images.dart';
 import 'explore_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -18,6 +19,8 @@ class HomeScreen extends StatelessWidget {
     ProfileScreen(),
 
   ];
+
+  bool  isSelected = true;
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +45,26 @@ class HomeScreen extends StatelessWidget {
           currentIndex: selectedIndex,
           items:[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: isSelected ? AppColors.lightBlue : Colors.transparent,
+                  borderRadius: BorderRadius.horizontal(
+                    left: Radius.circular(16),
+                    right: Radius.circular(16),
+
+                  ),
+                ),
+
+                  child: Image.asset(AppImages.exploreIcon)),
               label: 'Explore',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
+              icon: Image.asset(AppImages.resultIcon),
               label: 'Result',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Image.asset(AppImages.profileIcon),
               label: 'Profile',
             ),
           ]

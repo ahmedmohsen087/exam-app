@@ -1,7 +1,7 @@
 import 'package:exam_app/features/Home/data/models/subject_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'meta_data.dart';
+import '../meta_data.dart';
 
 part 'subjects_response.g.dart';
 

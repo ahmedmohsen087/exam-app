@@ -51,6 +51,22 @@ class AppTheme {
         ),
       ),
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.lightGray,
+      selectedItemColor: AppColors.blue,
+      unselectedItemColor: AppColors.blue,
+      showUnselectedLabels: true,
+      showSelectedLabels: true,
+      type: BottomNavigationBarType.fixed,
+      selectedIconTheme: IconThemeData(
+        color: AppColors.gray,
+      ),
+      unselectedIconTheme: IconThemeData(
+        color: AppColors.white,
+      ),
+
+
+    ),
     textTheme: TextTheme(
       bodyLarge: TextStyle(
         fontWeight: FontWeight.w500,
@@ -70,6 +86,11 @@ class AppTheme {
       labelMedium: TextStyle(
         fontWeight: FontWeight.w500,
         fontSize: 18,
+        color: AppColors.black,
+      ),
+      labelLarge: TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
         color: AppColors.black,
       ),
     ),

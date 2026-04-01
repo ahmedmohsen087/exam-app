@@ -12,7 +12,7 @@ class HomeRepoImpl implements HomeRepoContract {
 
 
   @override
-  Future<List<SubjectsModels>> getAllSubjects() {
+  Future<List<SubjectsModels>> getAllSubjects({String ? token,}) {
     return homeRemoteDataSourceContract.getAllSubjects().then((AllSubjectsDto){
       return AllSubjectsDto.map((dto) => dto.toDomain()).toList();
     });

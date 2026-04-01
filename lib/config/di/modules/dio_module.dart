@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:exam_app/core/values/endpoints.dart';
 import 'package:injectable/injectable.dart';
 
+
+
 @module
 abstract class DioModule {
   @lazySingleton
@@ -14,7 +16,6 @@ abstract class DioModule {
 
       ),
     );
-
     dio.interceptors.add(
       LogInterceptor(
         requestBody: true,

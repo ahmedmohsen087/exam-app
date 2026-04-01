@@ -11,7 +11,7 @@ class GetAllSubjectsUseCases {
   GetAllSubjectsUseCases(this.homeRepoContract);
 
 
-Future<List<SubjectsModels>> call () async {
-  return  await homeRepoContract.getAllSubjects();
+Future<List<SubjectsModels>> call ({String? token}) async {
+  return  await homeRepoContract.getAllSubjects(token :token);
 }
 }

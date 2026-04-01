@@ -1,4 +1,5 @@
 
+import 'package:exam_app/config/secure_storage/secure_storage_service.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/entities/subjects_models.dart';
@@ -12,15 +13,18 @@ class HomeScreenViewModel {
   final GetAllSubjectsUseCases getAllSubjectsUseCases;
 
   Future<void> getAllSubjects() async {
-    List<SubjectsModels> subjects = await getAllSubjectsUseCases();
 
-    subjects.forEach((subject) {
+    final token = await SecureStorageService.readToken();
+
+
+    List<SubjectsModels> subjects = await getAllSubjectsUseCases.call();
+
+    print('Subjects:');
+
+    for (var subject in subjects) {
       print(subject.name);
       print(subject.id);
       print('----------------');
-    });
-
-
-
+    }
   }
 }

@@ -100,6 +100,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => storageModule.secureStorage,
     );
+    gh.factory<_i556.HomeApiClient>(() => _i556.HomeApiClient(gh<_i361.Dio>()));
     gh.factory<_i356.ForgetPasswordClient>(
       () => _i356.ForgetPasswordClient(gh<_i361.Dio>()),
     );
