@@ -25,10 +25,10 @@ class SubjectDto {
   });
 
   SubjectsModels toDomain() => SubjectsModels(
-    id: id,
-    name: name,
-    icon: icon,
-    createdAt: createdAt,
+    id: id ?? '',
+    name: name ?? '',
+    icon: icon ?? '',
+    createdAt: createdAt ?? DateTime.now(),
   );
 
 

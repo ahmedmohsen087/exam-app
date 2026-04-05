@@ -53,8 +53,6 @@ class AppTheme {
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.lightGray,
-      selectedItemColor: AppColors.blue,
-      unselectedItemColor: AppColors.blue,
       showUnselectedLabels: true,
       showSelectedLabels: true,
       type: BottomNavigationBarType.fixed,
@@ -62,10 +60,14 @@ class AppTheme {
         color: AppColors.gray,
       ),
       unselectedIconTheme: IconThemeData(
-        color: AppColors.white,
+        color: AppColors.gray,
       ),
-
-
+      selectedLabelStyle: TextStyle(
+        color: AppColors.blue,
+      ),
+      unselectedLabelStyle: TextStyle(
+        color: AppColors.gray,
+      ),
     ),
     textTheme: TextTheme(
       bodyLarge: TextStyle(
