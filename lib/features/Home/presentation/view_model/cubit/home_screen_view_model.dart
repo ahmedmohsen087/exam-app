@@ -11,27 +11,57 @@ import '../states/home_screen_state.dart';
 @injectable
 class HomeScreenViewModel extends Cubit <HomeScreenState>{
 
-  HomeScreenViewModel(this.getAllSubjectsUseCases) : super(HomeInitialState());
+  HomeScreenViewModel(this.getAllSubjectsUseCases) : super(HomeScreenState());
 
   final GetAllSubjectsUseCases getAllSubjectsUseCases;
 
   Future<void> getAllSubjects() async {
-    emit(HomeLoadingState());
-    final token = await SecureStorageService.readToken();
-    print(token);
-   final subjects = await getAllSubjectsUseCases(token: token);
+    emit(state.copyWith(
+        isLoadingSubjects: true,
+        ));
 
-    print('Subjects: $subjects');
+    try {
+      final token = await SecureStorageService.readToken();
+      final subjects = await getAllSubjectsUseCases(token: token);
 
-    switch (subjects) {
-      case Success<List<SubjectsModels>>():
-        print(subjects.data);
-        emit(HomeSuccessState(subjects.data ??[] ));
-        break;
-      case Failed<List<SubjectsModels>>():
-        print(subjects.error);
-        emit(HomeErrorState(subjects.error.toString()));
-        break;
+      if (subjects is Success<List<SubjectsModels>>) {
+        emit(state.copyWith(
+          isLoadingSubjects: false,
+          subjectsList: subjects.data ?? [],
+        ));
+      } else if (subjects is Failed<List<SubjectsModels>>) {
+        emit(state.copyWith(
+          isLoadingSubjects: false,
+          errorMessage: subjects.msg,
+        ));
+      }
+    } catch (e) {
+      emit(state.copyWith(
+        isLoadingSubjects: false,
+        errorMessage: e.toString(),
+      ));
     }
   }
-}
+
+  void onSearchChanged(String query) {
+    List<SubjectsModels> filteredList = [];
+
+    if (query.isEmpty) {
+      filteredList = state.subjectsList;
+    } else {
+      filteredList = state.subjectsList.where((subject) {
+        return subject.name
+            .toLowerCase()
+            .contains(query.toLowerCase());
+      }).toList();
+    }
+
+    emit(state.copyWith(
+      searchQuery: query,
+      searchSubjectModels: filteredList,
+    ));
+  }
+
+
+      }
+

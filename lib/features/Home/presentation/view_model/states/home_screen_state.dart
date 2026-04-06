@@ -1,19 +1,41 @@
 import '../../../domain/entities/subjects_models.dart';
 
-sealed class HomeScreenState {}
+class HomeScreenState {
+  bool isLoadingSubjects = true;
+  List<SubjectsModels> subjectsList = [];
+  String? errorMessage;
+  String searchQuery = '';
+  List<SubjectsModels> searchSubjectModels = [];
 
-class HomeInitialState extends HomeScreenState {}
+  HomeScreenState({
+     this.isLoadingSubjects = true,
+     this.subjectsList = const [],
+     this.errorMessage,
+     this.searchQuery = '',
+     this.searchSubjectModels = const [],
+  });
 
-class HomeLoadingState extends HomeScreenState {}
+  HomeScreenState copyWith({
+    bool? isLoadingSubjects,
+    List<SubjectsModels>? subjectsList,
+    String? errorMessage,
+    String? searchQuery,
+    List<SubjectsModels>? searchSubjectModels,
+  })
+  {
+    return HomeScreenState(
+      isLoadingSubjects: isLoadingSubjects ?? this.isLoadingSubjects,
+      subjectsList: subjectsList ?? this.subjectsList,
+      errorMessage: errorMessage ?? this.errorMessage,
+      searchQuery: searchQuery ?? this.searchQuery,
+      searchSubjectModels: searchSubjectModels ?? this.searchSubjectModels,
+    );
+  }
 
-class HomeSuccessState extends HomeScreenState {
-  final List<SubjectsModels> subjects;
-  HomeSuccessState(this.subjects);
+
+
 }
 
-class HomeErrorState extends HomeScreenState {
-  final String error;
-  HomeErrorState(this.error);
-}
+
 
 
