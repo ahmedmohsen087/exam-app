@@ -19,70 +19,72 @@ class ExploreScreen extends StatelessWidget {
       backgroundColor: AppColors.white,
       body: BlocProvider<HomeScreenViewModel>(
         create: (context) => homeScreenViewModel..getAllSubjects(),
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            spacing: 20,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFormField(
-                onChanged: (value) {
-                  context.read<HomeScreenViewModel>().onSearchChanged(value);
-                },
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(50)),
-            hintText: 'Search',
-            prefixIcon: Icon(Icons.search,),
-          ),
+        child: Builder(
+          builder: (context) {
+            return Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                spacing: 20,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextFormField(
+                    onChanged: (value) {
+                      context.read<HomeScreenViewModel>().onSearchChanged(value);
+                    },
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      hintText: 'Search',
+                      prefixIcon: Icon(Icons.search),
+                    ),
                   ),
-              Text('Browse by subject',
 
-                style: AppTheme.lightTheme.textTheme.labelMedium,
-              ),
-              Expanded(
-                child: BlocBuilder<HomeScreenViewModel, HomeScreenState>(
-                    builder: (context, state) {
-                      if(state.isLoadingSubjects){
-                        return Center(child: CircularProgressIndicator());
-                      }
-                      if(state.errorMessage != null && state.errorMessage!.isNotEmpty){
-                        return Center(child: Text(state.errorMessage!)
+                  Text(
+                    'Browse by subject',
+                    style: AppTheme.lightTheme.textTheme.labelMedium,
+                  ),
+
+                  Expanded(
+                    child: BlocBuilder<HomeScreenViewModel, HomeScreenState>(
+                      builder: (context, state) {
+                        if (state.isLoadingSubjects) {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+
+                        if (state.errorMessage != null &&
+                            state.errorMessage!.isNotEmpty) {
+                          return Center(child: Text(state.errorMessage!));
+                        }
+
+                        final list = state.searchQuery.trim().isEmpty
+                            ? state.subjectsList
+                            : state.searchSubjectModels;
+
+                        if (list.isEmpty) {
+                          return const Center(child: Text('No results found'));
+                        }
+
+                        return ListView.separated(
+                          separatorBuilder: (_, _) =>
+                          const SizedBox(height: 10),
+                          itemCount: list.length,
+                          itemBuilder: (context, index) {
+                            return SubjectCard(
+                              title: list[index].name ,
+                              image: list[index].icon ,
+                            );
+                          },
                         );
-                      }
-                      final list = state.searchQuery.trim().isEmpty
-                          ? state.subjectsList
-                          : state.searchSubjectModels;
-
-                      if (list.isEmpty) {
-                        return const Center(
-                          child: Text('No results found'),
-                        );
-                      }
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: list.length,
-                        itemBuilder: (context, index) {
-                          return SubjectCard(
-                            title: list[index].name ,
-                            image: list[index].icon ,
-                          );
-                        },
-                      );
-                    }
-                ),
+                      },
+                    ),
+                  ),
+                ],
               ),
-              SubjectCard(
-                title: 'Mathematics',
-                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAGtClPVRwPdM34hqRwy3gy_tljgIAhm3nWQ&s n',
-              ),
-
-
-
-            ]
-
-          ),
+            );
+          },
         ),
-      ),
+      )
     );
   }
 

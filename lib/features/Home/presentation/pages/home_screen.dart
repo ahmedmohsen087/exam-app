@@ -10,11 +10,12 @@ import '../view_model/cubit/toggle_home_screen.dart';
 import 'explore_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+
   static const String routeName = 'Home Screen';
 
-  HomeScreen({super.key});
+   HomeScreen({super.key});
 
-  List<Widget> tabs = [
+  final List<Widget> tabs = [
     ExploreScreen(),
     ResultScreen(),
     ProfileScreen(),

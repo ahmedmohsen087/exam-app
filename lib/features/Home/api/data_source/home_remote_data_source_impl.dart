@@ -24,11 +24,11 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSourceContract {
       return Success<List<SubjectDto>>(data: response.subjects??[]);
     }catch (e){
       if (e is DioException) {
-        return Failed<List<SubjectDto>>(error: e ?? 'Dio Exception');
+        return Failed<List<SubjectDto>>(error: e );
       } else if (e is TimeoutException) {
-        return Failed<List<SubjectDto>>(error: e ?? "Timeout Exception");
+        return Failed<List<SubjectDto>>(error: e );
       }
-        return Failed<List<SubjectDto>>(error: e ?? 'Some Thing Went Wrong');
+        return Failed<List<SubjectDto>>(error: e );
 
 
     }
