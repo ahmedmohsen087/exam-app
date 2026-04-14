@@ -1,14 +1,13 @@
-import 'package:exam_app/config/di/di.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/theme/app_images.dart';
-import 'package:exam_app/features/exam_details/domain/entities/exam_details_entity.dart';
-import 'package:exam_app/features/exam_details/presentation/pages/start_exam_screen.dart';
-import 'package:exam_app/features/exam_details/presentation/view_model/cubit/exam_details_cubit.dart';
-import 'package:exam_app/features/exam_details/presentation/view_model/states/exam_details_state.dart';
+
+import '../../../../config/di/di.dart';
+import '../../domain/entities/exam_details_entity.dart';
+import 'start_exam_screen.dart';
+import '../view_model/cubit/exam_details_cubit.dart';
+import '../view_model/states/exam_details_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../core/values/app_param.dart';
 
 class ExamDetailsScreen extends StatelessWidget {
   static const String routeName = 'ExamDetailsScreen';
@@ -25,8 +24,7 @@ class ExamDetailsScreen extends StatelessWidget {
 
     // hard-coded token for debug
     const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YjBiZmE1Y2ViMmM1OWY4NGEzY2ViYSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc0OTY0MTIyfQ.isWo4zFoQLWLgoi2n4P_qLMKribP_ntwGeHTUD8nMyg";
-
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGJmMDg5MDRkYTBkNGNmNTU2OTM2ZiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc2MDM2MDE4fQ.6Ntb1my2FB-A4VzuDFDGvSYJ_ZrbJ9Ctrwh7EHpLJl0";
     return BlocProvider(
       create: (_) =>
           getIt<ExamDetailsCubit>()
@@ -103,22 +101,27 @@ class ExamDetailsScreen extends StatelessWidget {
                   'Questions: ${exam.numberOfQuestions}',
                   style: const TextStyle(fontSize: 13),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  'Date: ${date.day}/${date.month}/${date.year}',
-                  style: const TextStyle(fontSize: 13),
-                ),
+                const SizedBox(height: 16),
+                Text('$date', style: const TextStyle(fontSize: 13)),
               ],
             ),
-            trailing: const Text(
-              'Start',
-              style: TextStyle(color: AppColors.blue),
+            trailing: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: const [
+                Text(
+                  '30 Minutes',
+                  style: TextStyle(
+                    color: AppColors.blue,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
             ),
             onTap: () {
               Navigator.pushNamed(
                 context,
                 StartExamScreen.routeName,
-                arguments: {StartExamScreen.argExamId: exam.id},
+                arguments: exam,
               );
             },
           ),

@@ -9,7 +9,6 @@ import '../../features/exam_details/presentation/pages/exam_details_screen.dart'
 import '../../features/exam_details/presentation/pages/start_exam_screen.dart';
 import '../../features/exam_questions/presentation/pages/exam_questions_page_screen.dart';
 import '../../features/home_screen/presentation/pages/home_screen.dart';
-
 class AppRoutes {
   static Map<String, WidgetBuilder> routes = {
     SignInScreen.routeName: (context) => SignInScreen(),

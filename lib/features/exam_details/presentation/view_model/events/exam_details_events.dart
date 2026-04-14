@@ -1,8 +1,8 @@
 sealed class ExamDetailsEvent {}
 
-class FetchExamDetailsEvent extends ExamDetailsEvent {
+class GetSubjectExamsEvent extends ExamDetailsEvent {
   final String token;
   final String subjectId;
 
-  FetchExamDetailsEvent({required this.token, required this.subjectId});
+  GetSubjectExamsEvent({required this.token, required this.subjectId});
 }

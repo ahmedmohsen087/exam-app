@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:exam_app/core/values/endpoints.dart';
-import 'package:exam_app/features/exam_details/data/models/response/exam_details_response.dart';
+import 'package:exam_app/core/values/api_param.dart';
+import '../../../../core/values/endpoints.dart';
+import '../../data/models/response/exam_details_response.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -14,7 +15,7 @@ abstract class ExamDetailsClient {
 
   @GET(Endpoints.getSubjectExams)
   Future<ExamDetailsResponse> getSubjectExams(
-    @Header("token") String token,
-    @Query("subject") String subjectId,
+    @Header(ApiParam.token) String token,
+    @Query(ApiParam.subjectId) String subjectId,
   );
 }

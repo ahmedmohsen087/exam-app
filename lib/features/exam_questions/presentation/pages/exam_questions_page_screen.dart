@@ -6,7 +6,6 @@ class ExamQuestionsPageScreen extends StatelessWidget {
 
   const ExamQuestionsPageScreen({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     final args =

@@ -1,14 +1,14 @@
-import 'package:exam_app/config/base_response/base_response.dart';
-import 'package:exam_app/features/exam_details/api/client/exam_details_client.dart';
-import 'package:exam_app/features/exam_details/data/data_sources/exam_details_remote_data_source.dart';
-import 'package:exam_app/features/exam_details/data/models/response/exam_details_response.dart';
+import '../../../../config/base_response/base_response.dart';
+import '../client/exam_details_client.dart';
+import '../../data/data_sources/exam_details_remote_data_source.dart';
+import '../../data/models/response/exam_details_response.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: ExamDetailsRemoteDataSource)
-class ExamDetailsRemoteDataSourceImpl implements ExamDetailsRemoteDataSource {
-  final ExamDetailsClient _client;
+class ExamDetailsRemoteDataSourceImpl extends ExamDetailsRemoteDataSource {
+  final ExamDetailsClient _examDetailsClient;
 
-  ExamDetailsRemoteDataSourceImpl(this._client);
+  ExamDetailsRemoteDataSourceImpl(this._examDetailsClient);
 
   @override
   Future<BaseResponse<ExamDetailsResponse>> getSubjectExams({
@@ -16,7 +16,10 @@ class ExamDetailsRemoteDataSourceImpl implements ExamDetailsRemoteDataSource {
     required String subjectId,
   }) async {
     try {
-      final response = await _client.getSubjectExams(token, subjectId);
+      final response = await _examDetailsClient.getSubjectExams(
+        token,
+        subjectId,
+      );
       return Success<ExamDetailsResponse>(data: response);
     } catch (e) {
       return Failed<ExamDetailsResponse>(error: e);
