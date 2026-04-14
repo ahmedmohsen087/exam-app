@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
               context,
               ExamDetailsScreen.routeName,
               arguments: {
-                AppParam.subjectId: "670037f6728c92b7fdf434fc",
+               AppParam.subjectId: "670037f6728c92b7fdf434fc",
               },
             );
           },

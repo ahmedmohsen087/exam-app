@@ -1,4 +1,5 @@
 import 'package:exam_app/config/di/di.dart';
+import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/values/app_param.dart';
 import 'package:exam_app/features/exam_questions/presentation/view_model/cubit/questions_cubit.dart';
 import 'package:exam_app/features/exam_questions/presentation/view_model/event/questions_event.dart';
@@ -10,15 +11,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ExamQuestionsPageScreen extends StatelessWidget {
   static const String routeName = 'Exam Page Screen';
 
-  const ExamQuestionsPageScreen({super.key});
-
-  static const String argExamId = 'examId';
+  ExamQuestionsPageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, String>?;
-    final String examId = args?[argExamId] ?? 'No ID';
+    final String examId = args?[AppParam.examId] ?? 'No ID';
 
     return Scaffold(
       appBar: AppBar(
@@ -38,7 +37,7 @@ class ExamQuestionsPageScreen extends StatelessWidget {
           ..doEvent(
             GetAllQuestionsOnExamEvent(
               token:
-                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YWM2ZDkyY2ViMmM1OWY4NGEzYzg4YyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc0NjE3MTY0fQ.5vTrWWcmqm-FGQOidMCegKeALafp0RL5l9c2fyChhe0",
+                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGNhYmM0MDRkYTBkNGNmNTU2OTQ5NSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc2MTgxMDkwfQ.iWtX1hYzVH3bgCEEUSluXosoBi3ArNnHGihwU4zx00Q",
               examId: examId,
             ),
           ),
@@ -51,8 +50,24 @@ class ExamQuestionsPageScreen extends StatelessWidget {
                   child: CircularProgressIndicator(color: Colors.black),
                 );
               }
+
               if (state.questionsApi.msg != null) {
-                return Center(child: Text(state.questionsApi.msg!));
+                return Center(
+                  child: Text(
+                    state.questionsApi.msg!,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                );
+              }
+              if (state.questionsApi.data!.isEmpty) {
+                return Center(
+                  child: Text(
+                    'No Questions Available',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyLarge?.copyWith(color: AppColors.black),
+                  ),
+                );
               }
               return QuestionWidget(state);
             },

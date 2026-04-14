@@ -39,6 +39,7 @@ class _AnswersWidgetState extends State<AnswersWidget> {
     if (question.type == QuestionType.multipleChoice) {
       setState(() {
         currentAnswer.isSelected = !currentAnswer.isSelected;
+        question.selectedKeyList?.add(currentAnswer.key);
       });
     } else if (question.type == QuestionType.singleChoice) {
       setState(() {
@@ -46,6 +47,7 @@ class _AnswersWidgetState extends State<AnswersWidget> {
           answer.isSelected = false;
         }
         currentAnswer.isSelected = true;
+        question.selectedKey = currentAnswer.key;
       });
     } else {
       print("no case detected");

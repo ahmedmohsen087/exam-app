@@ -130,7 +130,10 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   }
 
   void navigateToExamScoreScreen() {
-    Navigator.of(context).pushNamed(ExamScorePage.routeName);
+    Navigator.of(context).pushNamed(
+      ExamScorePage.routeName,
+      arguments: {AppParam.questions: widget.state.questionsApi.data},
+    );
   }
 }
 
