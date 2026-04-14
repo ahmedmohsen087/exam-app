@@ -5,11 +5,12 @@ import 'package:exam_app/features/exam_questions/presentation/view_model/event/q
 import 'package:exam_app/features/exam_questions/presentation/view_model/state/question_state.dart';
 import 'package:exam_app/features/exam_questions/presentation/widgets/question_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ExamQuestionsPageScreen extends StatelessWidget {
   static const String routeName = 'Exam Page Screen';
 
-  ExamQuestionsPageScreen({super.key});
+  const ExamQuestionsPageScreen({super.key});
 
   static const String argExamId = 'examId';
 

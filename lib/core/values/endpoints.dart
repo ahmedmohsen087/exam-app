@@ -8,4 +8,5 @@ abstract class Endpoints {
   static const String resetPassword = "$baseUrl/auth/resetPassword";
   static const String signIn = "$baseUrl/auth/signin";
   static const String questionsOnExam = "/questions";
+  static const String getSubjectExams = "$baseUrl/exams";
 }
