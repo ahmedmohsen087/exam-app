@@ -10,7 +10,8 @@ import '../states/exam_details_state.dart';
 class ExamDetailsCubit extends Cubit<ExamDetailsState> {
   final ExamDetailsUseCase _examDetailsUseCase;
 
-  ExamDetailsCubit(this._examDetailsUseCase) : super(ExamDetailsState());
+  ExamDetailsCubit(this._examDetailsUseCase)
+    : super(ExamDetailsState.initial());
 
   Future<void> getSubjectExams({
     required String token,
@@ -32,7 +33,7 @@ class ExamDetailsCubit extends Cubit<ExamDetailsState> {
         emit(
           state.copyWith(
             subjectExamsState: BaseState(
-              isLoading: false,
+              isLoading: true,
               data: response.data ?? [],
               msg: null,
             ),

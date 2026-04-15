@@ -2,6 +2,7 @@
 //
 //     final examDetailsResponse = examDetailsResponseFromJson(jsonString);
 
+import 'package:exam_app/core/strings/features/exam_details/exam_details_strings.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'dart:convert';
 
@@ -15,11 +16,11 @@ String examDetailsResponseToJson(ExamDetailsResponse data) =>
 
 @JsonSerializable()
 class ExamDetailsResponse {
-  @JsonKey(name: "message")
+  @JsonKey(name: ExamDetailsStrings.message)
   String? message;
-  @JsonKey(name: "metadata")
+  @JsonKey(name: ExamDetailsStrings.metaData)
   Metadata? metadata;
-  @JsonKey(name: "exams")
+  @JsonKey(name: ExamDetailsStrings.exams)
   List<Exam>? exams;
 
   ExamDetailsResponse({this.message, this.metadata, this.exams});
@@ -32,19 +33,19 @@ class ExamDetailsResponse {
 
 @JsonSerializable()
 class Exam {
-  @JsonKey(name: "_id")
+  @JsonKey(name: ExamDetailsStrings.id)
   String? id;
-  @JsonKey(name: "title")
+  @JsonKey(name: ExamDetailsStrings.title)
   String? title;
-  @JsonKey(name: "duration")
+  @JsonKey(name: ExamDetailsStrings.duration)
   int? duration;
-  @JsonKey(name: "subject")
+  @JsonKey(name: ExamDetailsStrings.subject)
   String? subject;
-  @JsonKey(name: "numberOfQuestions")
+  @JsonKey(name: ExamDetailsStrings.numberOfQuestions)
   int? numberOfQuestions;
-  @JsonKey(name: "active")
+  @JsonKey(name: ExamDetailsStrings.active)
   bool? active;
-  @JsonKey(name: "createdAt")
+  @JsonKey(name: ExamDetailsStrings.createdAt)
   String? createdAt;
 
   Exam({
@@ -64,11 +65,11 @@ class Exam {
 
 @JsonSerializable()
 class Metadata {
-  @JsonKey(name: "currentPage")
+  @JsonKey(name: ExamDetailsStrings.currentPage)
   int? currentPage;
-  @JsonKey(name: "numberOfPages")
+  @JsonKey(name: ExamDetailsStrings.numberOfPages)
   int? numberOfPages;
-  @JsonKey(name: "limit")
+  @JsonKey(name: ExamDetailsStrings.limit)
   int? limit;
 
   Metadata({this.currentPage, this.numberOfPages, this.limit});

@@ -1,7 +1,10 @@
+import 'package:exam_app/core/strings/features/exam_details/exam_details_strings.dart';
+import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/values/app_param.dart';
 import 'package:exam_app/features/exam_details/presentation/pages/start_exam_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../config/di/di.dart';
 import '../../../../core/theme/app_images.dart';
@@ -10,7 +13,7 @@ import '../view_model/cubit/exam_details_cubit.dart';
 import '../view_model/states/exam_details_state.dart';
 
 class ExamDetailsScreen extends StatelessWidget {
-  static const String routeName = 'Exam Details Screen';
+  static const String routeName = ExamDetailsStrings.examDetailsScreen;
 
   const ExamDetailsScreen({super.key});
 
@@ -19,18 +22,17 @@ class ExamDetailsScreen extends StatelessWidget {
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, String>?;
 
-    final subjectId = args?[AppParam.examId] ?? '670037f6728c92b7fdf434fc';
+    final subjectId = args?[AppParam.examId];
 
-    // 🔹 hard-coded token for debug
-    const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGNhYmM0MDRkYTBkNGNmNTU2OTQ5NSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc2MTgxMDkwfQ.iWtX1hYzVH3bgCEEUSluXosoBi3ArNnHGihwU4zx00Q";
+    const token = ExamDetailsStrings.token;
+
     return BlocProvider(
       create: (_) =>
           getIt<ExamDetailsCubit>()
-            ..getSubjectExams(token: token, subjectId: subjectId),
+            ..getSubjectExams(token: token, subjectId: subjectId ?? ""),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Exam Details'),
+          title: const Text(ExamDetailsStrings.examDetailsScreen),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () => Navigator.pop(context),
@@ -39,19 +41,18 @@ class ExamDetailsScreen extends StatelessWidget {
         body: BlocBuilder<ExamDetailsCubit, ExamDetailsState>(
           builder: (context, state) {
             final examsState = state.subjectExamsState;
-
-            if (examsState.isLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
-            if (examsState.msg != null && examsState.msg!.isNotEmpty) {
-              return Center(child: Text(examsState.msg!));
-            }
-
             final exams = examsState.data ?? [];
 
-            if (exams.isEmpty) {
-              return const Center(child: Text('No Exams Available'));
+            if (examsState.isLoading && exams.isEmpty) {
+              return const Center(
+                child: CircularProgressIndicator(color: AppColors.black),
+              );
+            }
+
+            if (!examsState.isLoading && exams.isEmpty) {
+              return const Center(
+                child: Text(ExamDetailsStrings.noExamsAvailable),
+              );
             }
 
             return _buildExamsList(context, exams);
@@ -67,7 +68,6 @@ class ExamDetailsScreen extends StatelessWidget {
       itemCount: exams.length,
       itemBuilder: (context, index) {
         final exam = exams[index];
-        final date = exam.createdAt;
 
         return Container(
           margin: const EdgeInsets.only(bottom: 12),
@@ -102,16 +102,28 @@ class ExamDetailsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Questions: ${exam.numberOfQuestions}',
+                  '${ExamDetailsStrings.questions}: ${exam.numberOfQuestions}',
                   style: const TextStyle(fontSize: 13),
                 ),
                 const SizedBox(height: 8),
-                Text('$date', style: const TextStyle(fontSize: 13)),
+                Text(
+                  DateFormat('hh:mm a').format(exam.createdAt),
+                  style: const TextStyle(fontSize: 13),
+                ),
               ],
             ),
-            trailing: const Text(
-              '30 Minutes',
-              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w500),
+            trailing: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  ExamDetailsStrings.thirtyMinutes,
+                  style: const TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
             ),
             onTap: () {
               Navigator.pushNamed(
