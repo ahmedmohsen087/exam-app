@@ -84,6 +84,8 @@ import '../../features/Home/domain/use_cases/get_all_subjects_use_cases.dart'
     as _i29;
 import '../../features/Home/presentation/view_model/cubit/home_screen_view_model.dart'
     as _i974;
+import '../../features/profile/api/profile_api_client/profile_api_client.dart'
+    as _i1000;
 import 'modules/dio_module.dart' as _i983;
 import 'modules/secure_storage_module.dart' as _i590;
 
@@ -106,6 +108,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i739.SignInClient>(() => _i739.SignInClient(gh<_i361.Dio>()));
     gh.factory<_i359.SignUpClient>(() => _i359.SignUpClient(gh<_i361.Dio>()));
+    gh.factory<_i1000.ProfileApiClient>(
+      () => _i1000.ProfileApiClient(gh<_i361.Dio>()),
+    );
     gh.factory<_i897.SignUpRemoteDataSource>(
       () => _i272.SignUpRemoteDataSourceImp(gh<_i359.SignUpClient>()),
     );

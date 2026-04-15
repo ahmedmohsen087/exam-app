@@ -20,6 +20,11 @@ class HomeScreen extends StatelessWidget {
     ResultScreen(),
     ProfileScreen(),
   ];
+  final List<String> titles = [
+    'Survey',
+    'Result',
+    'Profile',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +34,9 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               title: Text(
-                'Survey',
+                titles[state.currentIndex],
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: AppColors.blue,
                   fontWeight: FontWeight.bold,
