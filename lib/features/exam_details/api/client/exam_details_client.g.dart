@@ -27,7 +27,7 @@ class _ExamDetailsClient implements ExamDetailsClient {
     String subjectId,
   ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'subject': subjectId};
+    final queryParameters = <String, dynamic>{r'subjectId': subjectId};
     final _headers = <String, dynamic>{r'token': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
@@ -35,7 +35,7 @@ class _ExamDetailsClient implements ExamDetailsClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/exams',
+            'https://exam.elevateegy.com/api/v1/exams',
             queryParameters: queryParameters,
             data: _data,
           )

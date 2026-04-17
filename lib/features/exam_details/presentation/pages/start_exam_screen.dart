@@ -4,6 +4,8 @@ import 'package:exam_app/features/exam_details/domain/entities/exam_details_enti
 import 'package:exam_app/features/exam_questions/presentation/pages/exam_questions_page_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/values/arg_param.dart';
+
 class StartExamScreen extends StatefulWidget {
   static const String routeName = ExamDetailsStrings.startExamScreen;
 
@@ -20,6 +22,8 @@ class _StartExamScreenState extends State<StartExamScreen> {
   Widget build(BuildContext context) {
     final exam =
         ModalRoute.of(context)!.settings.arguments as ExamDetailsEntity;
+
+    print("exam id : ${exam.id}");
 
     return Scaffold(
       appBar: AppBar(
@@ -133,6 +137,8 @@ class _StartExamScreenState extends State<StartExamScreen> {
                           context,
                           ExamQuestionsPageScreen.routeName,
                           arguments: {
+                            ArgParam.examId: exam.id,
+
                             ExamDetailsStrings.examId: exam.id,
                             ExamDetailsStrings.title: exam.title,
                           },

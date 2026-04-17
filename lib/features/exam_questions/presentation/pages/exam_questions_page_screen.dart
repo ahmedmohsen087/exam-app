@@ -1,6 +1,7 @@
 import 'package:exam_app/config/di/di.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
-import 'package:exam_app/core/values/app_param.dart';
+import 'package:exam_app/core/values/arg_param.dart';
+import 'package:exam_app/core/values/ui_strings.dart';
 import 'package:exam_app/features/exam_questions/presentation/view_model/cubit/questions_cubit.dart';
 import 'package:exam_app/features/exam_questions/presentation/view_model/event/questions_event.dart';
 import 'package:exam_app/features/exam_questions/presentation/view_model/state/question_state.dart';
@@ -17,7 +18,8 @@ class ExamQuestionsPageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, String>?;
-    final String examId = args?[AppParam.examId] ?? 'No ID';
+    final String examId = args?[ArgParam.examId] ?? 'No ID';
+
 
     return Scaffold(
       appBar: AppBar(
@@ -27,7 +29,7 @@ class ExamQuestionsPageScreen extends StatelessWidget {
         ),
         titleSpacing: 0,
         title: Text(
-          AppParam.exam,
+          UiStrings.exam,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
       ),

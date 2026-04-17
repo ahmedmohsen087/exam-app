@@ -1,11 +1,10 @@
 import 'package:exam_app/core/strings/features/exam_details/exam_details_strings.dart';
 import 'package:exam_app/core/theme/app_colors.dart';
-import 'package:exam_app/core/values/app_param.dart';
+import 'package:exam_app/core/values/arg_param.dart';
 import 'package:exam_app/features/exam_details/presentation/pages/start_exam_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-
 import '../../../../config/di/di.dart';
 import '../../../../core/theme/app_images.dart';
 import '../../domain/entities/exam_details_entity.dart';
@@ -22,7 +21,7 @@ class ExamDetailsScreen extends StatelessWidget {
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, String>?;
 
-    final subjectId = args?[AppParam.examId];
+    final subjectId = args?[ArgParam.examId];
 
     const token = ExamDetailsStrings.token;
 
@@ -108,6 +107,7 @@ class ExamDetailsScreen extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   DateFormat('hh:mm a').format(exam.createdAt),
+
                   style: const TextStyle(fontSize: 13),
                 ),
               ],

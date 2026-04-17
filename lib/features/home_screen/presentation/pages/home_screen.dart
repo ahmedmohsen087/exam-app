@@ -1,7 +1,7 @@
 import 'package:exam_app/config/secure_storage/secure_storage_service.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/values/app_param.dart';
+import '../../../../core/values/arg_param.dart';
 import '../../../exam_details/presentation/pages/exam_details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,9 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Navigator.pushNamed(
               context,
               ExamDetailsScreen.routeName,
-              arguments: {
-               AppParam.subjectId: "670037f6728c92b7fdf434fc",
-              },
+              arguments: {ArgParam.subjectId: "670037f6728c92b7fdf434fc"},
             );
           },
           child: Text('Go To Exam Details'),

@@ -1,5 +1,7 @@
 import 'package:exam_app/core/theme/app_colors.dart';
-import 'package:exam_app/core/values/app_param.dart';
+import 'package:exam_app/core/values/arg_param.dart';
+import 'package:exam_app/core/values/ui_strings.dart';
+import 'package:exam_app/features/exam_questions/domain/entities/question_type.dart';
 import 'package:exam_app/features/exam_questions/presentation/view_model/state/question_state.dart';
 import 'package:exam_app/features/exam_questions/presentation/widgets/answers_widget.dart';
 import 'package:exam_app/features/exam_questions/presentation/widgets/back_next_btn.dart';
@@ -21,13 +23,13 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   late int totalQuestions = widget.state.questionsApi.data!.length;
   int currentQuestionIndex = 0;
 
-  String nextBtnText = AppParam.next;
+  String nextBtnText = UiStrings.next;
 
   late double progress;
 
   @override
   void initState() {
-    progress = calcCurrentIndex(totalQuestions, currentQuestionIndex);
+    progress = _calcCurrentIndex(totalQuestions, currentQuestionIndex);
   }
 
   @override
@@ -45,7 +47,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            "Question ${currentQuestionIndex + 1} of ${totalQuestions}",
+            "Question ${currentQuestionIndex + 1} of $totalQuestions",
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
@@ -63,7 +65,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
 
           SizedBox(height: 28),
           Text(
-            currentQuestion.question ?? "No Content",
+            currentQuestion.question ?? UiStrings.noContent,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -83,7 +85,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                     borderColor: AppColors.blue,
                     text: "Back",
                     textColor: AppColors.blue,
-                    onPress: backBtnClick,
+                    onPress: _backBtnClick,
                   ),
                 ),
                 SizedBox(width: 16),
@@ -93,7 +95,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                     borderColor: Colors.transparent,
                     text: nextBtnText,
                     textColor: AppColors.white,
-                    onPress: () => nextBtnClick(),
+                    onPress: _nextBtnClick,
                   ),
                 ),
               ],
@@ -105,39 +107,60 @@ class _QuestionWidgetState extends State<QuestionWidget> {
     );
   }
 
-  void nextBtnClick() {
+  void _nextBtnClick() {
     if (currentQuestionIndex < totalQuestions - 1) {
       setState(() {
         currentQuestionIndex++;
-        progress = calcCurrentIndex(totalQuestions, currentQuestionIndex);
+        progress = _calcCurrentIndex(totalQuestions, currentQuestionIndex);
         if (currentQuestionIndex == totalQuestions - 1) {
-          nextBtnText = AppParam.finish;
+          nextBtnText = UiStrings.finish;
         }
       });
     } else if (currentQuestionIndex == totalQuestions - 1) {
-      navigateToExamScoreScreen();
+      _navigateToExamScoreScreen();
     }
   }
 
-  void backBtnClick() {
+  void _backBtnClick() {
     if (currentQuestionIndex > 0) {
       setState(() {
         currentQuestionIndex--;
-        nextBtnText = AppParam.next;
-        progress = calcCurrentIndex(totalQuestions, currentQuestionIndex);
+        nextBtnText = UiStrings.next;
+        progress = _calcCurrentIndex(totalQuestions, currentQuestionIndex);
       });
     }
   }
 
-  void navigateToExamScoreScreen() {
+  void _navigateToExamScoreScreen() {
+    int totalN = totalQuestions;
+    int correctN = _calcCorrect(widget.state.questionsApi.data!);
+    int inCorrectN = totalN - correctN;
     Navigator.of(context).pushNamed(
       ExamScorePage.routeName,
-      arguments: {AppParam.questions: widget.state.questionsApi.data},
+      arguments: {
+        ArgParam.totalN: totalN,
+        ArgParam.correctN: correctN,
+        ArgParam.inCorrectN: inCorrectN,
+      },
     );
   }
 }
 
-double calcCurrentIndex(int totalQuestions, int currentQuestionIndex) {
+int _calcCorrect(List<Question> questions) {
+  int correctN = 0;
+  for (Question q in questions) {
+    if (q.type == QuestionType.multipleChoice) {
+      // n
+    } else if (q.type == QuestionType.singleChoice) {
+      if (q.selectedKey == q.correctKey) {
+        correctN++;
+      }
+    }
+  }
+  return correctN;
+}
+
+double _calcCurrentIndex(int totalQuestions, int currentQuestionIndex) {
   currentQuestionIndex++;
   double progress = (currentQuestionIndex / totalQuestions);
   return progress;

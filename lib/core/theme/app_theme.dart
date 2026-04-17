@@ -47,7 +47,10 @@ class AppTheme {
           EdgeInsets.symmetric(vertical: 10, horizontal: 24),
         ),
         shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: BorderSide(color: AppColors.blue),
+          ),
         ),
       ),
     ),
