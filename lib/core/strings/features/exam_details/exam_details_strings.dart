@@ -2,7 +2,7 @@ abstract class ExamDetailsStrings {
   static const String message = "message";
   static const String metaData = "metadata";
   static const String exams = "exams";
-  static const String id = "id";
+  static const String id = "_id";
   static const String title = "title";
   static const String duration = "duration";
   static const String subject = "subject";
