@@ -8,7 +8,7 @@ import '../models/user_profile_dto.dart';
 
 abstract class ProfileRemoteDataSourceContract {
 
-  Future<BaseResponse<List<UserProfileDto>>> getProfileData(
+  Future<BaseResponse<UserProfileDto>> getProfileData(
       {String ?token});
 
 }

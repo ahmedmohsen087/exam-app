@@ -1,5 +1,5 @@
 import 'package:exam_app/core/theme/app_colors.dart';
-import 'package:exam_app/features/Home/presentation/pages/profile_screen.dart';
+import 'package:exam_app/features/profile/presentation/pages/profile_screen.dart';
 import 'package:exam_app/features/Home/presentation/pages/result_screen.dart';
 import 'package:exam_app/features/Home/presentation/view_model/states/toggle_home_screen_state.dart';
 import 'package:flutter/material.dart';

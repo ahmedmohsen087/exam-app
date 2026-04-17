@@ -84,8 +84,18 @@ import '../../features/Home/domain/use_cases/get_all_subjects_use_cases.dart'
     as _i29;
 import '../../features/Home/presentation/view_model/cubit/home_screen_view_model.dart'
     as _i974;
+import '../../features/profile/api/data_source/profile_remote_data_source_impl.dart'
+    as _i154;
 import '../../features/profile/api/profile_api_client/profile_api_client.dart'
     as _i1000;
+import '../../features/profile/data/data_source/profile_remote_data_source_contract.dart'
+    as _i385;
+import '../../features/profile/data/repo/profile_repo_impl.dart' as _i256;
+import '../../features/profile/domain/repo/profile_repo_contract.dart' as _i541;
+import '../../features/profile/domain/use_cases/get_profile_use_cases.dart'
+    as _i91;
+import '../../features/profile/presentation/view_model/cubit/profile_view_model.dart'
+    as _i458;
 import 'modules/dio_module.dart' as _i983;
 import 'modules/secure_storage_module.dart' as _i590;
 
@@ -124,6 +134,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i356.ForgetPasswordClient>(),
       ),
     );
+    gh.factory<_i385.ProfileRemoteDataSourceContract>(
+      () => _i154.ProfileRemoteDataSourceImpl(gh<_i1000.ProfileApiClient>()),
+    );
     gh.factory<_i924.SignUpRepo>(
       () => _i311.SignUpRepoImp(gh<_i897.SignUpRemoteDataSource>()),
     );
@@ -157,6 +170,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i430.VerifyResetCodeUseCase>(
       () => _i430.VerifyResetCodeUseCase(gh<_i740.VerifyResetCodeRepo>()),
     );
+    gh.factory<_i541.ProfileRepoContract>(
+      () => _i256.ProfileRepoImpl(gh<_i385.ProfileRemoteDataSourceContract>()),
+    );
     gh.factory<_i29.GetAllSubjectsUseCases>(
       () => _i29.GetAllSubjectsUseCases(gh<_i797.HomeRepoContract>()),
     );
@@ -177,11 +193,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i74.SignInRepo>(
       () => _i766.SignInRepoImp(gh<_i528.SignInRemoteDataSource>()),
     );
+    gh.factory<_i91.GetProfileUseCases>(
+      () => _i91.GetProfileUseCases(gh<_i541.ProfileRepoContract>()),
+    );
     gh.factory<_i988.SignInUseCase>(
       () => _i988.SignInUseCase(gh<_i74.SignInRepo>()),
     );
     gh.factory<_i374.ResetPasswordUseCase>(
       () => _i374.ResetPasswordUseCase(gh<_i33.ResetPasswordRepo>()),
+    );
+    gh.factory<_i458.ProfileViewModel>(
+      () => _i458.ProfileViewModel(gh<_i91.GetProfileUseCases>()),
     );
     gh.factory<_i374.SignInViewModel>(
       () => _i374.SignInViewModel(gh<_i988.SignInUseCase>()),

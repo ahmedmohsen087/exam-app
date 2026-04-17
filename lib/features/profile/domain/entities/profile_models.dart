@@ -8,6 +8,10 @@ class ProfileModels {
   final String role;
   final bool isVerified;
   final DateTime createdAt;
+  final String passwordResetCode;
+  final DateTime passwordResetExpires;
+  final bool resetCodeVerified;
+
 
   ProfileModels({
     required this.id,
@@ -19,4 +23,8 @@ class ProfileModels {
     required this.role,
     required this.isVerified,
     required this.createdAt,
-  });}
+    required this.passwordResetCode,
+    required this.passwordResetExpires,
+    required this.resetCodeVerified,
+  });
+  }

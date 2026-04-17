@@ -32,6 +32,15 @@ class UserProfileDto {
   @JsonKey(name: "createdAt")
   DateTime? createdAt;
 
+  @JsonKey(name: "passwordResetCode")
+  String? passwordResetCode;
+
+  @JsonKey(name: "passwordResetExpires")
+  DateTime? passwordResetExpires;
+
+  @JsonKey(name: "resetCodeVerified")
+  bool? resetCodeVerified;
+
   UserProfileDto({
     this.id,
     this.username,
@@ -42,6 +51,9 @@ class UserProfileDto {
     this.role,
     this.isVerified,
     this.createdAt,
+    this.passwordResetCode,
+    this.passwordResetExpires,
+    this.resetCodeVerified,
   });
 
   ProfileModels toDomain() => ProfileModels(
@@ -54,6 +66,11 @@ class UserProfileDto {
     role: role ?? '',
     isVerified: isVerified ?? false,
     createdAt: createdAt ?? DateTime.now(),
+    passwordResetCode: passwordResetCode ?? '',
+    passwordResetExpires: passwordResetExpires ?? DateTime.now(),
+    resetCodeVerified: resetCodeVerified ?? false,
+
+
   );
 
   factory UserProfileDto.fromJson(Map<String, dynamic> json) =>
