@@ -71,6 +71,7 @@ class ExploreScreen extends StatelessWidget {
                           itemCount: list.length,
                           itemBuilder: (context, index) {
                             return SubjectCard(
+                              token: state.token!,
                               title: list[index].name ,
                               image: list[index].icon ,
                             );

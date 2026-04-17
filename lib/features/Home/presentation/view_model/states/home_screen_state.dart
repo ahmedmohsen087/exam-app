@@ -6,6 +6,7 @@ class HomeScreenState {
   String? errorMessage;
   String searchQuery = '';
   List<SubjectsModels> searchSubjectModels = [];
+  String? token = '';
 
   HomeScreenState({
      this.isLoadingSubjects = true,
@@ -13,6 +14,7 @@ class HomeScreenState {
      this.errorMessage,
      this.searchQuery = '',
      this.searchSubjectModels = const [],
+    this.token ,
   });
 
   HomeScreenState copyWith({
@@ -21,6 +23,7 @@ class HomeScreenState {
     String? errorMessage,
     String? searchQuery,
     List<SubjectsModels>? searchSubjectModels,
+    String? token,
   })
   {
     return HomeScreenState(
@@ -29,6 +32,7 @@ class HomeScreenState {
       errorMessage: errorMessage ?? this.errorMessage,
       searchQuery: searchQuery ?? this.searchQuery,
       searchSubjectModels: searchSubjectModels ?? this.searchSubjectModels,
+      token: token ?? this.token,
     );
   }
 

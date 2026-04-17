@@ -28,7 +28,7 @@ class _QuestionOptionCardState extends State<QuestionOptionCard> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.lightBlue,
+        color: AppColors.lightGray,
         borderRadius: BorderRadius.circular(10),
       ),
       padding: EdgeInsets.all(17.5),

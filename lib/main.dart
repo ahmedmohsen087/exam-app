@@ -1,7 +1,6 @@
 import 'package:exam_app/config/di/di.dart';
 import 'package:exam_app/core/theme/app_theme.dart';
 import 'package:exam_app/core/utils/app_routes.dart';
-import 'package:exam_app/features/home_screen/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'features/auth/sign_up/presentation/pages/sign_up_screen.dart';
 

@@ -28,11 +28,13 @@ class HomeScreenViewModel extends Cubit <HomeScreenState>{
         emit(state.copyWith(
           isLoadingSubjects: false,
           subjectsList: subjects.data ?? [],
+          token: token ,
         ));
       } else if (subjects is Failed<List<SubjectsModels>>) {
         emit(state.copyWith(
           isLoadingSubjects: false,
           errorMessage: subjects.msg,
+          token: token ,
         ));
       }
     } catch (e) {

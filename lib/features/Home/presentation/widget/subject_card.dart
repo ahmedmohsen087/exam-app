@@ -1,23 +1,29 @@
+import 'package:exam_app/core/values/arg_param.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../exam_details/presentation/pages/exam_details_screen.dart';
 
 class SubjectCard extends StatelessWidget {
   final String title;
   final String image;
+  final String token ;
+
+
 
   const SubjectCard({
     super.key,
     required this.title,
     required this.image,
+    required this.token,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.pushNamed(context, '/subject_screen');
+        Navigator.pushNamed(context, ExamDetailsScreen.routeName, arguments: {ArgParam.token: token, });
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
