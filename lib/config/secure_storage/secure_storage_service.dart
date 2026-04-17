@@ -6,10 +6,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class SecureStorageService {
   static final storage = getIt<FlutterSecureStorage>();
 
-  static Future<String?> get token => readToken();
+  static Future<String?> get token async => await readToken();
 
   static Future<void> writeToken(String? token) async {
-    await storage.write(key: SecureStorageKeys.token, value: token);
+    if (token != null) {
+      await storage.write(key: SecureStorageKeys.token, value: token);
+    }
   }
 
   static Future<String?> readToken() async {

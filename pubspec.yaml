@@ -41,6 +41,9 @@ dependencies:
   shared_preferences: ^2.5.4
   pinput: ^6.0.2
   flutter_secure_storage: ^10.0.0
+  flutter_svg: ^2.2.4
+  intl: ^0.18.0
+  percent_indicator: ^4.2.5
 
 dev_dependencies:
   build_runner: ^2.6.0
@@ -56,6 +59,7 @@ dev_dependencies:
   # add the generator to your dev_dependencies
   injectable_generator: null
   json_serializable: ^6.10.0
+  mockito:
   retrofit_generator: ^10.0.1
 
 # For information on the generic Dart part of this file, see the
@@ -66,11 +70,15 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/icon/
+    - assets/images/
+    - assets/svg/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see

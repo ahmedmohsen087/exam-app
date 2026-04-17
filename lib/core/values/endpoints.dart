@@ -9,4 +9,6 @@ abstract class Endpoints {
   static const String signIn = "$baseUrl/auth/signin";
   static const String profileData = "$baseUrl/auth/profileData";
   static const String getAllSubjects = "$baseUrl/subjects";
+  static const String questionsOnExam = "/questions";
+  static const String getSubjectExams = "$baseUrl/exams";
 }
