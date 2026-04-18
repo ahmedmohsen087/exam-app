@@ -23,12 +23,12 @@ class ExamDetailsScreen extends StatelessWidget {
 
     final subjectId = args?[ArgParam.examId];
 
-    const token = ExamDetailsStrings.token;
-
+    //const token = ExamDetailsStrings.token;
+    final token = args?[ArgParam.token];
     return BlocProvider(
       create: (_) =>
           getIt<ExamDetailsCubit>()
-            ..getSubjectExams(token: token, subjectId: subjectId ?? ""),
+            ..getSubjectExams(token: token??'', subjectId: subjectId ?? ""),
       child: Scaffold(
         appBar: AppBar(
           title: const Text(ExamDetailsStrings.examDetailsScreen),
