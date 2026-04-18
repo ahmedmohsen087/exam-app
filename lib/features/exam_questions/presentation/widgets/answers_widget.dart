@@ -24,8 +24,8 @@ class _AnswersWidgetState extends State<AnswersWidget> {
       itemBuilder: (context, currentOptionIndex) {
         return QuestionOptionCard(
           question: widget.question,
-          selectedIcon: Images.selected_btn_icon,
-          unselectedIcon: Images.unselected_btn_icon,
+          selectedIcon: AppImages.selectedBtnIcon,
+          unselectedIcon: AppImages.unselectedBtnIcon,
           currentAnswer: widget.question.answers![currentOptionIndex],
           onOptionSelect: selectOption,
         );
