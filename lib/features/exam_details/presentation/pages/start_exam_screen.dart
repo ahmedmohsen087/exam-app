@@ -20,10 +20,10 @@ class _StartExamScreenState extends State<StartExamScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final exam =
-        ModalRoute.of(context)!.settings.arguments as ExamDetailsEntity;
-
-    print("exam id : ${exam.id}");
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final token = args?[ArgParam.token] as String;
+    final exam = args?[ArgParam.exam] as ExamDetailsEntity?;
 
     return Scaffold(
       appBar: AppBar(
@@ -39,13 +39,12 @@ class _StartExamScreenState extends State<StartExamScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Title + Duration
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: Text(
-                          exam.title,
+                          exam!.title,
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
@@ -138,9 +137,7 @@ class _StartExamScreenState extends State<StartExamScreen> {
                           ExamQuestionsPageScreen.routeName,
                           arguments: {
                             ArgParam.examId: exam.id,
-
-                            ExamDetailsStrings.examId: exam.id,
-                            ExamDetailsStrings.title: exam.title,
+                            ArgParam.token: token,
                           },
                         );
                       },

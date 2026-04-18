@@ -22,13 +22,11 @@ class ExamDetailsScreen extends StatelessWidget {
         ModalRoute.of(context)?.settings.arguments as Map<String, String>?;
 
     final subjectId = args?[ArgParam.examId];
-
-    //const token = ExamDetailsStrings.token;
     final token = args?[ArgParam.token];
     return BlocProvider(
       create: (_) =>
           getIt<ExamDetailsCubit>()
-            ..getSubjectExams(token: token??'', subjectId: subjectId ?? ""),
+            ..getSubjectExams(token: token ?? '', subjectId: subjectId ?? ""),
       child: Scaffold(
         appBar: AppBar(
           title: const Text(ExamDetailsStrings.examDetailsScreen),
@@ -54,20 +52,23 @@ class ExamDetailsScreen extends StatelessWidget {
               );
             }
 
-            return _buildExamsList(context, exams);
+            return _buildExamsList(context, exams, token ?? '');
           },
         ),
       ),
     );
   }
 
-  Widget _buildExamsList(BuildContext context, List<ExamDetailsEntity> exams) {
+  Widget _buildExamsList(
+    BuildContext context,
+    List<ExamDetailsEntity> exams,
+    String token,
+  ) {
     return ListView.builder(
       padding: const EdgeInsets.all(16),
       itemCount: exams.length,
       itemBuilder: (context, index) {
         final exam = exams[index];
-
 
         return Container(
           margin: const EdgeInsets.only(bottom: 12),
@@ -130,7 +131,7 @@ class ExamDetailsScreen extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 StartExamScreen.routeName,
-                arguments: exam,
+                arguments: {ArgParam.exam: exam, ArgParam.token: token},
               );
             },
           ),

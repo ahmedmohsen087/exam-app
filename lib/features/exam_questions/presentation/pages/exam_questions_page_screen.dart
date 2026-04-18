@@ -19,7 +19,7 @@ class ExamQuestionsPageScreen extends StatelessWidget {
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, String>?;
     final String examId = args?[ArgParam.examId] ?? 'No ID';
-
+    final String token = args?[ArgParam.token] ?? 'No Token';
 
     return Scaffold(
       appBar: AppBar(
@@ -36,13 +36,7 @@ class ExamQuestionsPageScreen extends StatelessWidget {
 
       body: BlocProvider<QuestionsCubit>(
         create: (context) => getIt<QuestionsCubit>()
-          ..doEvent(
-            GetAllQuestionsOnExamEvent(
-              token:
-                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZGNhYmM0MDRkYTBkNGNmNTU2OTQ5NSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc2MTgxMDkwfQ.iWtX1hYzVH3bgCEEUSluXosoBi3ArNnHGihwU4zx00Q",
-              examId: examId,
-            ),
-          ),
+          ..doEvent(GetAllQuestionsOnExamEvent(token: token, examId: examId)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BlocBuilder<QuestionsCubit, QuestionState>(
