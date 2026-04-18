@@ -1,0 +1,283 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format width=80
+
+// **************************************************************************
+// InjectableConfigGenerator
+// **************************************************************************
+
+// ignore_for_file: type=lint
+// coverage:ignore-file
+
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:dio/dio.dart' as _i361;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
+import 'package:get_it/get_it.dart' as _i174;
+import 'package:injectable/injectable.dart' as _i526;
+
+import '../../features/auth/forget_password/api/client/forget_password_client.dart'
+    as _i356;
+import '../../features/auth/forget_password/api/data_source/forgot_password/forgot_password_remote_data_source_imp.dart'
+    as _i358;
+import '../../features/auth/forget_password/api/data_source/reset_password/reset_password_remote_data_source_imp.dart'
+    as _i232;
+import '../../features/auth/forget_password/api/data_source/verify_reset_code/verify_reset_code_remote_data_source_impl.dart'
+    as _i168;
+import '../../features/auth/forget_password/data/data_sources/forgot_password/forgot_password_remote_data_source.dart'
+    as _i978;
+import '../../features/auth/forget_password/data/data_sources/reset_password/reset_password_remote_data_source.dart'
+    as _i270;
+import '../../features/auth/forget_password/data/data_sources/verify_reset_code/verify_reset_code_remote_data_source.dart'
+    as _i918;
+import '../../features/auth/forget_password/data/repositories/forget_password_repo_imp.dart'
+    as _i636;
+import '../../features/auth/forget_password/data/repositories/reset_password_repo_imp.dart'
+    as _i286;
+import '../../features/auth/forget_password/data/repositories/verify_reset_code_repo_imp.dart'
+    as _i891;
+import '../../features/auth/forget_password/domain/repositories/forget_password_repo.dart'
+    as _i924;
+import '../../features/auth/forget_password/domain/repositories/reset_password_repo.dart'
+    as _i33;
+import '../../features/auth/forget_password/domain/repositories/verify_reset_code_repo.dart'
+    as _i740;
+import '../../features/auth/forget_password/domain/usecases/forget_password_use_case.dart'
+    as _i737;
+import '../../features/auth/forget_password/domain/usecases/reset_password_use_case.dart'
+    as _i374;
+import '../../features/auth/forget_password/domain/usecases/verify_reset_code_use_case.dart'
+    as _i430;
+import '../../features/auth/forget_password/presentation/view_model/cubit/forget_password_cubit.dart'
+    as _i621;
+import '../../features/auth/sign_in/api/client/sign_in_client.dart' as _i739;
+import '../../features/auth/sign_in/api/data_sources/sign_in_remote_data_source_imp.dart'
+    as _i530;
+import '../../features/auth/sign_in/data/data_sources/sign_in_remote_data_source.dart'
+    as _i528;
+import '../../features/auth/sign_in/data/repositories/sign_in_repo_imp.dart'
+    as _i766;
+import '../../features/auth/sign_in/domain/repositories/sign_in_repo.dart'
+    as _i74;
+import '../../features/auth/sign_in/domain/use_cases/sign_in.dart' as _i988;
+import '../../features/auth/sign_in/presentation/view_model/cubit/sign_in_view_model.dart'
+    as _i374;
+import '../../features/auth/sign_up/api/client/sign_up_client.dart' as _i359;
+import '../../features/auth/sign_up/api/data_sources/sign_up_remote_data_source_imp.dart'
+    as _i272;
+import '../../features/auth/sign_up/data/data_sources/sign_up_remote_data_source.dart'
+    as _i897;
+import '../../features/auth/sign_up/data/repositories/sign_up_repo_imp.dart'
+    as _i311;
+import '../../features/auth/sign_up/domain/repositories/sign_up_repo.dart'
+    as _i924;
+import '../../features/auth/sign_up/domain/use_cases/sign_up_use_case.dart'
+    as _i45;
+import '../../features/auth/sign_up/presentation/view_model/cubit/sign_up_cubit.dart'
+    as _i667;
+import '../../features/exam_details/api/client/exam_details_client.dart'
+    as _i533;
+import '../../features/exam_details/api/data_source/exam_details_remote_data_source_impl.dart'
+    as _i406;
+import '../../features/exam_details/data/data_sources/exam_details_remote_data_source.dart'
+    as _i676;
+import '../../features/exam_details/data/repositories/exam_details_repo_impl.dart'
+    as _i122;
+import '../../features/exam_details/domain/repositories/exam_details_repo.dart'
+    as _i231;
+import '../../features/exam_details/domain/usecases/exam_details_use_case.dart'
+    as _i636;
+import '../../features/exam_details/presentation/view_model/cubit/exam_details_cubit.dart'
+    as _i78;
+import '../../features/exam_questions/api/client/questions_client.dart'
+    as _i860;
+import '../../features/exam_questions/api/data_sources/questions_remote_data_source_imp.dart'
+    as _i691;
+import '../../features/exam_questions/data/data_sources/questions_remote_data_source.dart'
+    as _i237;
+import '../../features/exam_questions/data/repositories/questions_repo_imp.dart'
+    as _i96;
+import '../../features/exam_questions/domain/repositories/questions_repo.dart'
+    as _i181;
+import '../../features/exam_questions/domain/use_cases/get_questions_on_exam_use_case.dart'
+    as _i384;
+import '../../features/exam_questions/presentation/view_model/cubit/questions_cubit.dart'
+    as _i851;
+import '../../features/Home/api/data_source/home_remote_data_source_impl.dart'
+    as _i386;
+import '../../features/Home/api/home_api_client/home_api_client.dart' as _i556;
+import '../../features/Home/data/data_sources/home_remote_data_source_contract.dart'
+    as _i337;
+import '../../features/Home/data/repo/home_repo_impl.dart' as _i759;
+import '../../features/Home/domain/repo/home_repo_contract.dart' as _i797;
+import '../../features/Home/domain/use_cases/get_all_subjects_use_cases.dart'
+    as _i29;
+import '../../features/Home/presentation/view_model/cubit/home_screen_view_model.dart'
+    as _i974;
+import '../../features/profile/api/data_source/profile_remote_data_source_impl.dart'
+    as _i154;
+import '../../features/profile/api/profile_api_client/profile_api_client.dart'
+    as _i1000;
+import '../../features/profile/data/data_source/profile_remote_data_source_contract.dart'
+    as _i385;
+import '../../features/profile/data/repo/profile_repo_impl.dart' as _i256;
+import '../../features/profile/domain/repo/profile_repo_contract.dart' as _i541;
+import '../../features/profile/domain/use_cases/get_profile_use_cases.dart'
+    as _i91;
+import '../../features/profile/presentation/view_model/cubit/profile_view_model.dart'
+    as _i458;
+import 'modules/dio_module.dart' as _i983;
+import 'modules/secure_storage_module.dart' as _i590;
+
+extension GetItInjectableX on _i174.GetIt {
+  // initializes the registration of main-scope dependencies inside of GetIt
+  _i174.GetIt init({
+    String? environment,
+    _i526.EnvironmentFilter? environmentFilter,
+  }) {
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final dioModule = _$DioModule();
+    final storageModule = _$StorageModule();
+    gh.lazySingleton<_i361.Dio>(() => dioModule.dio());
+    gh.lazySingleton<_i558.FlutterSecureStorage>(
+      () => storageModule.secureStorage,
+    );
+    gh.factory<_i556.HomeApiClient>(() => _i556.HomeApiClient(gh<_i361.Dio>()));
+    gh.factory<_i356.ForgetPasswordClient>(
+      () => _i356.ForgetPasswordClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i739.SignInClient>(() => _i739.SignInClient(gh<_i361.Dio>()));
+    gh.factory<_i359.SignUpClient>(() => _i359.SignUpClient(gh<_i361.Dio>()));
+    gh.factory<_i533.ExamDetailsClient>(
+      () => _i533.ExamDetailsClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i860.QuestionsClient>(
+      () => _i860.QuestionsClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i1000.ProfileApiClient>(
+      () => _i1000.ProfileApiClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i897.SignUpRemoteDataSource>(
+      () => _i272.SignUpRemoteDataSourceImp(gh<_i359.SignUpClient>()),
+    );
+    gh.factory<_i918.VerifyResetCodeRemoteDataSource>(
+      () => _i168.VerifyResetCodeRemoteDataSourceImp(
+        gh<_i356.ForgetPasswordClient>(),
+      ),
+    );
+    gh.factory<_i978.ForgotPasswordRemoteDataSource>(
+      () => _i358.ForgotPasswordRemoteDataSourceImp(
+        gh<_i356.ForgetPasswordClient>(),
+      ),
+    );
+    gh.factory<_i385.ProfileRemoteDataSourceContract>(
+      () => _i154.ProfileRemoteDataSourceImpl(gh<_i1000.ProfileApiClient>()),
+    );
+    gh.factory<_i924.SignUpRepo>(
+      () => _i311.SignUpRepoImp(gh<_i897.SignUpRemoteDataSource>()),
+    );
+    gh.factory<_i45.SignUpUseCase>(
+      () => _i45.SignUpUseCase(gh<_i924.SignUpRepo>()),
+    );
+    gh.factory<_i337.HomeRemoteDataSourceContract>(
+      () => _i386.HomeRemoteDataSourceImpl(gh<_i556.HomeApiClient>()),
+    );
+    gh.factory<_i528.SignInRemoteDataSource>(
+      () => _i530.SignInRemoteDataSourceImp(gh<_i739.SignInClient>()),
+    );
+    gh.factory<_i676.ExamDetailsRemoteDataSource>(
+      () =>
+          _i406.ExamDetailsRemoteDataSourceImpl(gh<_i533.ExamDetailsClient>()),
+    );
+    gh.factory<_i797.HomeRepoContract>(
+      () => _i759.HomeRepoImpl(gh<_i337.HomeRemoteDataSourceContract>()),
+    );
+    gh.factory<_i740.VerifyResetCodeRepo>(
+      () => _i891.VerifyResetCodeRepoImpl(
+        gh<_i918.VerifyResetCodeRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i270.ResetPasswordRemoteDataSource>(
+      () => _i232.ResetPasswordRemoteDataSourceImpl(
+        gh<_i356.ForgetPasswordClient>(),
+      ),
+    );
+    gh.factory<_i237.QuestionsRemoteDataSource>(
+      () => _i691.QuestionsRemoteDataSourceImp(gh<_i860.QuestionsClient>()),
+    );
+    gh.factory<_i924.ForgetPasswordRepo>(
+      () => _i636.ForgetPasswordRepoImpl(
+        gh<_i978.ForgotPasswordRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i430.VerifyResetCodeUseCase>(
+      () => _i430.VerifyResetCodeUseCase(gh<_i740.VerifyResetCodeRepo>()),
+    );
+    gh.factory<_i541.ProfileRepoContract>(
+      () => _i256.ProfileRepoImpl(gh<_i385.ProfileRemoteDataSourceContract>()),
+    );
+    gh.factory<_i231.ExamDetailsRepo>(
+      () => _i122.ExamDetailsRepoImpl(gh<_i676.ExamDetailsRemoteDataSource>()),
+    );
+    gh.factory<_i29.GetAllSubjectsUseCases>(
+      () => _i29.GetAllSubjectsUseCases(gh<_i797.HomeRepoContract>()),
+    );
+    gh.factory<_i974.HomeScreenViewModel>(
+      () => _i974.HomeScreenViewModel(gh<_i29.GetAllSubjectsUseCases>()),
+    );
+    gh.factory<_i737.ForgotPasswordUseCase>(
+      () => _i737.ForgotPasswordUseCase(gh<_i924.ForgetPasswordRepo>()),
+    );
+    gh.factory<_i33.ResetPasswordRepo>(
+      () => _i286.ResetPasswordRepoImpl(
+        gh<_i270.ResetPasswordRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i181.QuestionsRepo>(
+      () => _i96.QuestionsRepoImp(gh<_i237.QuestionsRemoteDataSource>()),
+    );
+    gh.factory<_i667.SignUpCubit>(
+      () => _i667.SignUpCubit(gh<_i45.SignUpUseCase>()),
+    );
+    gh.factory<_i74.SignInRepo>(
+      () => _i766.SignInRepoImp(gh<_i528.SignInRemoteDataSource>()),
+    );
+    gh.factory<_i91.GetProfileUseCases>(
+      () => _i91.GetProfileUseCases(gh<_i541.ProfileRepoContract>()),
+    );
+    gh.factory<_i636.ExamDetailsUseCase>(
+      () => _i636.ExamDetailsUseCase(gh<_i231.ExamDetailsRepo>()),
+    );
+    gh.factory<_i384.GetQuestionsOnExamUseCase>(
+      () => _i384.GetQuestionsOnExamUseCase(gh<_i181.QuestionsRepo>()),
+    );
+    gh.factory<_i988.SignInUseCase>(
+      () => _i988.SignInUseCase(gh<_i74.SignInRepo>()),
+    );
+    gh.factory<_i374.ResetPasswordUseCase>(
+      () => _i374.ResetPasswordUseCase(gh<_i33.ResetPasswordRepo>()),
+    );
+    gh.factory<_i78.ExamDetailsCubit>(
+      () => _i78.ExamDetailsCubit(gh<_i636.ExamDetailsUseCase>()),
+    );
+    gh.factory<_i851.QuestionsCubit>(
+      () => _i851.QuestionsCubit(gh<_i384.GetQuestionsOnExamUseCase>()),
+    );
+    gh.factory<_i458.ProfileViewModel>(
+      () => _i458.ProfileViewModel(gh<_i91.GetProfileUseCases>()),
+    );
+    gh.factory<_i374.SignInViewModel>(
+      () => _i374.SignInViewModel(gh<_i988.SignInUseCase>()),
+    );
+    gh.factory<_i621.ForgotPasswordCubit>(
+      () => _i621.ForgotPasswordCubit(
+        gh<_i737.ForgotPasswordUseCase>(),
+        gh<_i430.VerifyResetCodeUseCase>(),
+        gh<_i374.ResetPasswordUseCase>(),
+      ),
+    );
+    return this;
+  }
+}
+
+class _$DioModule extends _i983.DioModule {}
+
+class _$StorageModule extends _i590.StorageModule {}

@@ -47,8 +47,29 @@ class AppTheme {
           EdgeInsets.symmetric(vertical: 10, horizontal: 24),
         ),
         shape: WidgetStateProperty.all(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: BorderSide(color: AppColors.blue),
+          ),
         ),
+      ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.lightGray,
+      showUnselectedLabels: true,
+      showSelectedLabels: true,
+      type: BottomNavigationBarType.fixed,
+      selectedIconTheme: IconThemeData(
+        color: AppColors.gray,
+      ),
+      unselectedIconTheme: IconThemeData(
+        color: AppColors.gray,
+      ),
+      selectedLabelStyle: TextStyle(
+        color: AppColors.blue,
+      ),
+      unselectedLabelStyle: TextStyle(
+        color: AppColors.gray,
       ),
     ),
     textTheme: TextTheme(
@@ -65,6 +86,16 @@ class AppTheme {
       bodySmall: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 13,
+        color: AppColors.black,
+      ),
+      labelMedium: TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 18,
+        color: AppColors.black,
+      ),
+      labelLarge: TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
         color: AppColors.black,
       ),
     ),

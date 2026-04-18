@@ -1,33 +1,80 @@
-import 'package:exam_app/config/secure_storage/secure_storage_service.dart';
+import 'package:exam_app/core/theme/app_colors.dart';
+import 'package:exam_app/features/profile/presentation/pages/profile_screen.dart';
+import 'package:exam_app/features/Home/presentation/pages/result_screen.dart';
+import 'package:exam_app/features/Home/presentation/view_model/states/toggle_home_screen_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreen extends StatefulWidget {
+import '../../../../core/values/images.dart';
+import '../view_model/cubit/toggle_home_screen.dart';
+import 'explore_screen.dart';
+
+class HomeScreen extends StatelessWidget {
+
   static const String routeName = 'Home Screen';
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+   HomeScreen({super.key});
 
-class _HomeScreenState extends State<HomeScreen> {
-  String? hashToken;
-
-  @override
-  void initState() {
-    SecureStorageService.token.then((value) {
-      setState(() {
-        hashToken = value;
-      });
-      print("hashToken is $hashCode");
-    });
-  }
+  final List<Widget> tabs = [
+    ExploreScreen(),
+    ResultScreen(),
+    ProfileScreen(),
+  ];
+  final List<String> titles = [
+    'Survey',
+    'Result',
+    'Profile',
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: hashToken == null
-            ? CircularProgressIndicator(color: Colors.black)
-            : Text(hashToken!, style: TextStyle(color: Colors.black)),
+    return BlocProvider(
+      create: (_) => ToggleHomeScreen(),
+      child: BlocBuilder<ToggleHomeScreen, ToggleHomeScreenState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              title: Text(
+                titles[state.currentIndex],
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: AppColors.blue,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              centerTitle: false,
+              backgroundColor: AppColors.white,
+              elevation: 0,
+            ),
+
+            bottomNavigationBar: BottomNavigationBar(
+              backgroundColor: AppColors.white,
+
+              currentIndex: state.currentIndex,
+
+              onTap: (index) {
+                context.read<ToggleHomeScreen>().changeIndex(index);
+              },
+
+              items: [
+                BottomNavigationBarItem(
+                  icon: Image.asset(AppImages.exploreIcon),
+                  label: 'Explore',
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset(AppImages.resultIcon),
+                  label: 'Result',
+                ),
+                BottomNavigationBarItem(
+                  icon: Image.asset(AppImages.profileIcon),
+                  label: 'Profile',
+                ),
+              ],
+            ),
+
+            body: tabs[state.currentIndex],
+          );
+        },
       ),
     );
   }

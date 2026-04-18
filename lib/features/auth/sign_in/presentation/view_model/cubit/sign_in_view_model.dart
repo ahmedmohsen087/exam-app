@@ -6,6 +6,7 @@ import 'package:exam_app/features/auth/sign_in/presentation/view_model/States/si
 import 'package:exam_app/features/auth/sign_in/presentation/view_model/events/sign_in_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @injectable
 class SignInViewModel extends Cubit<SignInState> {
@@ -50,4 +51,10 @@ class SignInViewModel extends Cubit<SignInState> {
         break;
     }
   }
+
+
+
+
+
+
 }

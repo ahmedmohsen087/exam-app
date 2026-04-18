@@ -7,12 +7,13 @@ import 'package:exam_app/features/auth/sign_in/presentation/view_model/cubit/sig
 import 'package:exam_app/features/auth/sign_in/presentation/view_model/events/sign_in_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/utils/validators.dart';
 import '../../../../Home/presentation/pages/home_screen.dart';
 
 class SignInScreen extends StatelessWidget {
-  SignInViewModel _signInViewModel = getIt<SignInViewModel>();
+  final SignInViewModel _signInViewModel = getIt<SignInViewModel>();
   static const String routeName = 'sign-in';
 
   SignInScreen({super.key});
@@ -70,7 +71,9 @@ class SignInScreen extends StatelessWidget {
                   SizedBox(height: 10),
                   Row(
                     children: [
-                      Checkbox(value: rememberMe, onChanged: (value) {}),
+                      Checkbox(value: rememberMe, onChanged: (value) {
+                        rememberMe = value!;
+                      }),
                       Text(
                         'Remember me',
                         style: AppTheme.lightTheme.textTheme.bodySmall,
@@ -95,8 +98,15 @@ class SignInScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (formKey.currentState!.validate()) {
+
+                          if (rememberMe) {
+                            final prefs = await SharedPreferences.getInstance();
+                            await prefs.setString('email', emailController.text);
+                            await prefs.setString('password', passwordController.text);
+                          }
+
                           _signInViewModel.doEvent(
                             SignInEvent(
                               emailController.text,
@@ -119,9 +129,9 @@ class SignInScreen extends StatelessWidget {
                         listener: (context, state) {
                           if (state.api1State.isLoading == false &&
                               state.api1State.msg == null) {
-                            Navigator.of(context).pushNamed(
-                              HomeScreen.routeName,
-                            );
+                            Navigator.of(
+                              context,
+                            ).pushNamed(HomeScreen.routeName);
                           } else if (state.api1State.isLoading == false &&
                               state.api1State.msg != null) {
                             ScaffoldMessenger.of(context).showSnackBar(
