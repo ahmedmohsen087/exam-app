@@ -9,6 +9,7 @@ import '../../features/auth/sign_up/presentation/pages/sign_up_screen.dart';
 import '../../features/exam_details/presentation/pages/exam_details_screen.dart';
 import '../../features/exam_details/presentation/pages/start_exam_screen.dart';
 import '../../features/exam_questions/presentation/pages/exam_questions_page_screen.dart';
+import '../../features/profile/presentation/pages/edit_profile_screen.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> routes = {
@@ -21,6 +22,7 @@ class AppRoutes {
     ExamDetailsScreen.routeName: (_) => ExamDetailsScreen(),
     ExamQuestionsPageScreen.routeName: (_) => ExamQuestionsPageScreen(),
     StartExamScreen.routeName: (_) => StartExamScreen(),
-    ExamScorePage.routeName : (_)=> ExamScorePage()
+    ExamScorePage.routeName : (_)=> ExamScorePage(),
+    EditProfileScreen.routeName: (_) => EditProfileScreen(),
   };
 }
