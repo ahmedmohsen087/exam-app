@@ -1,4 +1,5 @@
 import 'package:exam_app/features/profile/data/models/user_profile_dto.dart';
+import 'package:exam_app/features/profile/domain/entities/edit_profile_request.dart';
 import 'package:exam_app/features/profile/domain/entities/edit_profile_models.dart';
 import 'package:exam_app/features/profile/domain/entities/profile_models.dart';
 import 'package:exam_app/features/profile/domain/repo/profile_repo_contract.dart';
@@ -7,7 +8,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../config/base_response/base_response.dart';
 import '../data_source/profile_remote_data_source_contract.dart';
 import '../models/edit_profile_dto.dart';
-import '../models/response/edit_profile_response.dart';
+import '../models/edit_profile_request_dto.dart';
 @Injectable(as: ProfileRepoContract)
 class ProfileRepoImpl  implements ProfileRepoContract{
 
@@ -33,11 +34,18 @@ class ProfileRepoImpl  implements ProfileRepoContract{
   }
 
 
+  @override
   Future<BaseResponse<EditProfileModels>> updateProfile({
-    required EditProfileResponse request,
+    required EditProfileRequest request,
   }) async {
     final response = await profileRemoteDataSourceContract.updateProfile(
-      request: request,
+      request: EditProfileRequestDto(
+        username: request.username,
+        firstName: request.firstName,
+        lastName: request.lastName,
+        email: request.email,
+        phone: request.phone,
+      ),
     );
     switch (response) {
       case Success<EditProfileDto>():

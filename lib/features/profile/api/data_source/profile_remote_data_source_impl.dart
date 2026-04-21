@@ -7,7 +7,7 @@ import '../../../../config/base_response/base_response.dart';
 import '../../../../config/secure_storage/secure_storage_service.dart';
 import '../../data/data_source/profile_remote_data_source_contract.dart';
 import '../../data/models/edit_profile_dto.dart';
-import '../../data/models/response/edit_profile_response.dart';
+import '../../data/models/edit_profile_request_dto.dart';
 import '../../data/models/user_profile_dto.dart';
 import '../profile_api_client/profile_api_client.dart';
 
@@ -40,8 +40,9 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceContract {
     }
   }
 
+  @override
   Future<BaseResponse<EditProfileDto>> updateProfile({
-    required EditProfileResponse request,
+    required EditProfileRequestDto request,
   }) async {
     try {
       final response = await profileApiClient.updateProfile(

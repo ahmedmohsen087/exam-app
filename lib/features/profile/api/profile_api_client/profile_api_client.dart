@@ -4,6 +4,7 @@ import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import '../../../../core/values/arg_param.dart';
 import '../../../../core/values/endpoints.dart';
+import '../../data/models/edit_profile_request_dto.dart';
 import '../../data/models/response/edit_profile_response.dart';
 import '../../data/models/response/profile_response.dart';
 
@@ -23,7 +24,7 @@ abstract class ProfileApiClient {
   @PUT(Endpoints.editProfile)
   Future<EditProfileResponse> updateProfile({
     @Header(ArgParam.token) String? token,
-    @Body() required EditProfileResponse request,
+    @Body() required EditProfileRequestDto request,
   });
 
 

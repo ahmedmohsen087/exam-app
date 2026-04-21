@@ -129,11 +129,15 @@ class ProfileScreen extends StatelessWidget {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: AppColors.gray,
                                   ),
-                                  onPressed: () {
-                                    Navigator.pushNamed(
+                                  onPressed: () async {
+                                    final isUpdated = await Navigator.pushNamed(
                                       context,
                                       EditProfileScreen.routeName,
                                     );
+
+                                    if (isUpdated == true && context.mounted) {
+                                      context.read<ProfileViewModel>().getUserData();
+                                    }
                                   },
                                   child: Text(
                                     'Update',

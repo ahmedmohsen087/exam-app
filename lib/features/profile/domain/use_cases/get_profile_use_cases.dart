@@ -2,7 +2,7 @@ import 'package:exam_app/features/profile/domain/entities/profile_models.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../config/base_response/base_response.dart';
-import '../../data/models/response/edit_profile_response.dart';
+import '../entities/edit_profile_request.dart';
 import '../entities/edit_profile_models.dart';
 import '../repo/profile_repo_contract.dart';
 @injectable
@@ -16,10 +16,9 @@ class GetProfileUseCases {
   }
 
   Future<BaseResponse<EditProfileModels>> updateProfile({
-    required EditProfileResponse request,
+    required EditProfileRequest request,
   }) async {
     return await profileRepoContract.updateProfile(request: request);
   }
 }
-
 
