@@ -66,7 +66,7 @@ class ExploreScreen extends StatelessWidget {
                         }
 
                         return ListView.separated(
-                          separatorBuilder: (_, _) =>
+                          separatorBuilder: (_, __) =>
                           const SizedBox(height: 10),
                           itemCount: list.length,
                           itemBuilder: (context, index) {

@@ -1,4 +1,5 @@
 import 'package:exam_app/config/di/di.dart';
+import 'package:exam_app/config/hive/hive_setup/hive_setup.dart';
 import 'package:exam_app/core/theme/app_theme.dart';
 import 'package:exam_app/core/utils/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,10 @@ import 'features/auth/sign_up/presentation/pages/sign_up_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await HiveSetup.init();
   await configureDependencies();
-  runApp(MyApp());
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
