@@ -1,20 +1,31 @@
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/values/ui_strings.dart';
+import 'package:exam_app/features/exam_questions/domain/entities/exam_attempt.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../../../core/values/arg_param.dart';
 
-class ExamScorePage extends StatelessWidget {
+class ExamScorePage extends StatefulWidget {
   static String routeName = "exam score screen";
 
   @override
-  Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments as Map<String, int>;
+  State<ExamScorePage> createState() => _ExamScorePageState();
+}
 
-    int totalN = args[ArgParam.totalN]!;
-    int correctN = args[ArgParam.correctN]!;
-    int inCorrectN = args[ArgParam.inCorrectN]!;
+class _ExamScorePageState extends State<ExamScorePage> {
+  late String examId;
+  @override
+Widget build(BuildContext context) {
+  final args =
+      ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+
+  int totalN = args[ArgParam.totalN];
+  int correctN = args[ArgParam.correctN];
+  int inCorrectN = args[ArgParam.inCorrectN];
+
+  examId = args[ArgParam.examId] ?? '';
+    
 
     return Scaffold(
       appBar: AppBar(
@@ -69,14 +80,30 @@ class ExamScorePage extends StatelessWidget {
             ),
             Spacer(),
             ElevatedButton(
-              onPressed: () {},
-              child: Text(
-                UiStrings.showResult,
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(fontSize: 16),
-              ),
-            ),
+  onPressed: () {
+    final attempt = ExamAttempt(
+      examId: examId, // لاحقًا خده من args أو state
+      total: totalN,
+      correct: correctN,
+      incorrect: inCorrectN,
+      submittedAt: DateTime.now(),
+      questions: [], // لو محتاجها حطها أو مررها من البداية
+    );
+
+    Navigator.pushNamed(
+      context,
+      .routeName,
+      arguments: attempt,
+    );
+  },
+  child: Text(
+    UiStrings.showResult,
+    style: Theme.of(context)
+        .textTheme
+        .bodyMedium
+        ?.copyWith(fontSize: 16),
+  ),
+),
             SizedBox(height: 24),
             ElevatedButton(
               style: ButtonStyle(
