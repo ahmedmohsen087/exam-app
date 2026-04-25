@@ -1,3 +1,5 @@
+import 'package:exam_app/features/profile/presentation/pages/profile_image.dart';
+import 'package:exam_app/features/profile/presentation/pages/reset_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,8 +29,9 @@ class ProfileScreen extends StatelessWidget {
           return Container(
             color: AppColors.white,
             child: SafeArea(
-              child: Stack(
+              child: Column(
                 children: [
+                  ProfileImage(),
                   SingleChildScrollView(
                     padding: const EdgeInsets.all(20.0),
                     keyboardDismissBehavior:
@@ -100,18 +103,22 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 20),
                               TextFormField(
-                                initialValue:
-                                    (user?.passwordResetCode.isNotEmpty ?? false)
-                                        ? user!.passwordResetCode
-                                        : '*******',
+                                initialValue: '********',
                                 readOnly: true,
-                                obscureText: true,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   labelText: 'Password',
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
+                                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                                  suffixText: 'Change',
+                                  suffixStyle: TextStyle(
+                                    color: AppColors.blue,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
+                                onTap: () {
+                                  Navigator.pushNamed(context, ResetPasswordScreen.routeName);
+                                },
                               ),
+
                               const SizedBox(height: 20),
                               TextFormField(
                                 initialValue: user?.phone ?? '',

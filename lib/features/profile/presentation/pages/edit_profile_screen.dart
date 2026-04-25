@@ -1,5 +1,6 @@
 import 'package:exam_app/core/theme/app_colors.dart';
 import 'package:exam_app/core/theme/app_theme.dart';
+import 'package:exam_app/features/profile/presentation/pages/profile_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -87,8 +88,9 @@ class EditProfileScreen extends StatelessWidget {
             ),
             body: Container(
               color: AppColors.white,
-              child: Stack(
+              child: Column(
                 children: [
+                  ProfileImage(),
                   SingleChildScrollView(
                     padding: const EdgeInsets.all(20.0),
                     keyboardDismissBehavior:
@@ -176,6 +178,7 @@ class EditProfileScreen extends StatelessWidget {
                   ),
                   if (state.isUpdatingProfile)
                     const Center(child: CircularProgressIndicator()),
+
                 ],
               ),
             ),
