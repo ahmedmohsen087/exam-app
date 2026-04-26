@@ -1,5 +1,5 @@
+import 'package:exam_app/features/auth/forget_password/presentation/pages/reset_password_view.dart';
 import 'package:exam_app/features/profile/presentation/pages/profile_image.dart';
-import 'package:exam_app/features/profile/presentation/pages/reset_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -115,7 +115,7 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ),
                                 onTap: () {
-                                  Navigator.pushNamed(context, ResetPasswordScreen.routeName);
+                                  Navigator.pushNamed(context, ResetPasswordView.routeName);
                                 },
                               ),
 

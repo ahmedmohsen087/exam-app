@@ -2,7 +2,6 @@ import 'package:exam_app/features/auth/forget_password/presentation/pages/email_
 import 'package:exam_app/features/auth/forget_password/presentation/pages/forget_password_view.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/pages/reset_password_view.dart';
 import 'package:exam_app/features/exam_questions/presentation/pages/exam_score_page.dart';
-import 'package:exam_app/features/profile/presentation/pages/reset_password_screen.dart';
 import 'package:flutter/material.dart';
 import '../../features/Home/presentation/pages/home_screen.dart';
 import '../../features/auth/sign_in/presentation/pages/sign_in_screen.dart';
@@ -25,6 +24,5 @@ class AppRoutes {
     StartExamScreen.routeName: (_) => StartExamScreen(),
     ExamScorePage.routeName : (_)=> ExamScorePage(),
     EditProfileScreen.routeName: (_) => EditProfileScreen(),
-    ResetPasswordScreen.routeName : (_)=> ResetPasswordScreen(),
   };
 }

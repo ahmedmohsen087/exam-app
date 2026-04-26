@@ -122,8 +122,6 @@ import '../../features/profile/data/repo/profile_repo_impl.dart' as _i256;
 import '../../features/profile/domain/repo/profile_repo_contract.dart' as _i541;
 import '../../features/profile/domain/use_cases/get_profile_use_cases.dart'
     as _i91;
-import '../../features/profile/presentation/view_model/cubit/reset_password_cubit.dart'
-    as _i604;
 import '../../features/profile/presentation/view_model/cubit/profile_view_model.dart'
     as _i458;
 import 'modules/dio_module.dart' as _i983;
@@ -266,7 +264,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i458.ProfileViewModel>(
       () => _i458.ProfileViewModel(gh<_i91.GetProfileUseCases>()),
     );
-    gh.factory<_i604.ResetPasswordCubit>(() => _i604.ResetPasswordCubit());
     gh.factory<_i374.SignInViewModel>(
       () => _i374.SignInViewModel(gh<_i988.SignInUseCase>()),
     );
