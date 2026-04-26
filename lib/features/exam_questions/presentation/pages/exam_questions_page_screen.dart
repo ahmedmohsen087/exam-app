@@ -33,40 +33,60 @@ class ExamQuestionsPageScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyLarge,
         ),
       ),
-
       body: BlocProvider<QuestionsCubit>(
         create: (context) => getIt<QuestionsCubit>()
           ..doEvent(GetAllQuestionsOnExamEvent(token: token, examId: examId)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: BlocBuilder<QuestionsCubit, QuestionState>(
-            builder: (context, state) {
-              if (state.questionsApi.isLoading) {
-                return Center(
-                  child: CircularProgressIndicator(color: Colors.black),
+          // ADDED: BlocListener to handle side effects (like navigation to score screen) after exam submission.
+          // We don't use it for UI rendering; only for actions triggered by state changes.
+          child: BlocListener<QuestionsCubit, QuestionState>(
+            listener: (context, state) {
+              if (state is ExamSubmittedState) {
+                Navigator.pushNamed(
+                  context,
+                  ExamScorePage.routeName,
+                  arguments: {
+                    ArgParam.totalN: state.total,
+                    ArgParam.correctN: state.correct,
+                    ArgParam.inCorrectN: state.total - state.correct,
+                  },
                 );
               }
-
-              if (state.questionsApi.msg != null) {
-                return Center(
-                  child: Text(
-                    state.questionsApi.msg!,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                );
-              }
-              if (state.questionsApi.data!.isEmpty) {
-                return Center(
-                  child: Text(
-                    'No Questions Available',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyLarge?.copyWith(color: AppColors.black),
-                  ),
-                );
-              }
-              return QuestionWidget(state);
             },
+            child: BlocBuilder<QuestionsCubit, QuestionState>(
+              builder: (context, state) {
+                if (state.questionsApi.isLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(color: Colors.black),
+                  );
+                }
+
+                if (state.questionsApi.msg != null) {
+                  return Center(
+                    child: Text(
+                      state.questionsApi.msg!,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  );
+                }
+                //  Added: Check for null or empty data before rendering the QuestionWidget to avoid errors and provide user feedback.
+                if (state.questionsApi.data == null ||
+                    state.questionsApi.data!.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'No Questions Available',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(color: AppColors.black),
+                    ),
+                  );
+                }
+
+                return QuestionWidget(state);
+              },
+            ),
           ),
         ),
       ),

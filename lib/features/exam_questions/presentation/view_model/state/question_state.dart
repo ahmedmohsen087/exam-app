@@ -10,3 +10,15 @@ class QuestionState {
     return QuestionState(questionsApi: questionsApi ?? this.questionsApi);
   }
 }
+
+// ✅ Added
+class ExamSubmittedState extends QuestionState {
+  final int total;
+  final int correct;
+
+  ExamSubmittedState({
+    required this.total,
+    required this.correct,
+    required super.questionsApi,
+  });
+}
