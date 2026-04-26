@@ -8,8 +8,7 @@ import '../../../../core/theme/app_theme.dart';
 import '../view_model/states/home_screen_state.dart';
 
 class ExploreScreen extends StatelessWidget {
-   ExploreScreen({super.key});
- final HomeScreenViewModel homeScreenViewModel = getIt.get<HomeScreenViewModel>();
+   const ExploreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class ExploreScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       body: BlocProvider<HomeScreenViewModel>(
-        create: (context) => homeScreenViewModel..getAllSubjects(),
+        create: (context) => getIt.get<HomeScreenViewModel>()..getAllSubjects(),
         child: Builder(
           builder: (context) {
             return Padding(

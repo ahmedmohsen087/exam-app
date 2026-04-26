@@ -4,7 +4,10 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../config/base_response/base_response.dart';
+import '../../../../config/secure_storage/secure_storage_service.dart';
 import '../../data/data_source/profile_remote_data_source_contract.dart';
+import '../../data/models/edit_profile_dto.dart';
+import '../../data/models/edit_profile_request_dto.dart';
 import '../../data/models/user_profile_dto.dart';
 import '../profile_api_client/profile_api_client.dart';
 
@@ -34,6 +37,39 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceContract {
         return Failed<UserProfileDto>(error: e);
       }
       return Failed<UserProfileDto>(error: e);
+    }
+  }
+
+  @override
+  Future<BaseResponse<EditProfileDto>> updateProfile({
+    required EditProfileRequestDto request,
+  }) async {
+    try {
+      final response = await profileApiClient.updateProfile(
+        token: await SecureStorageService.readToken(),
+        request: request,
+      );
+
+      final user = response.user;
+
+      if (user != null) {
+        return Success<EditProfileDto>(data: user);
+      } else {
+        return Failed<EditProfileDto>(error: 'No user data');
+      }
+
+    } on DioException catch (e) {
+      return Failed<EditProfileDto>(
+        error: e.response?.data['message'] ?? 'Server error',
+      );
+    } on TimeoutException {
+      return Failed<EditProfileDto>(
+        error: 'Request timeout',
+      );
+    } catch (e) {
+      return Failed<EditProfileDto>(
+        error: 'Unexpected error',
+      );
     }
   }
 }

@@ -1,3 +1,5 @@
+import 'package:exam_app/features/auth/forget_password/presentation/pages/reset_password_view.dart';
+import 'package:exam_app/features/profile/presentation/pages/profile_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -6,6 +8,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../view_model/cubit/profile_view_model.dart';
 import '../view_model/states/profile_state.dart';
+import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -26,8 +29,9 @@ class ProfileScreen extends StatelessWidget {
           return Container(
             color: AppColors.white,
             child: SafeArea(
-              child: Stack(
+              child: Column(
                 children: [
+                  ProfileImage(),
                   SingleChildScrollView(
                     padding: const EdgeInsets.all(20.0),
                     keyboardDismissBehavior:
@@ -99,18 +103,22 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 20),
                               TextFormField(
-                                initialValue:
-                                    (user?.passwordResetCode.isNotEmpty ?? false)
-                                        ? user!.passwordResetCode
-                                        : '*******',
+                                initialValue: '********',
                                 readOnly: true,
-                                obscureText: true,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   labelText: 'Password',
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
+                                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                                  suffixText: 'Change',
+                                  suffixStyle: TextStyle(
+                                    color: AppColors.blue,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
+                                onTap: () {
+                                  Navigator.pushNamed(context, ResetPasswordView.routeName);
+                                },
                               ),
+
                               const SizedBox(height: 20),
                               TextFormField(
                                 initialValue: user?.phone ?? '',
@@ -128,7 +136,16 @@ class ProfileScreen extends StatelessWidget {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: AppColors.gray,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    final isUpdated = await Navigator.pushNamed(
+                                      context,
+                                      EditProfileScreen.routeName,
+                                    );
+
+                                    if (isUpdated == true && context.mounted) {
+                                      context.read<ProfileViewModel>().getUserData();
+                                    }
+                                  },
                                   child: Text(
                                     'Update',
                                     style:
