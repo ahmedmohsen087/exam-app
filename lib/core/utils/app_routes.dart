@@ -2,6 +2,8 @@ import 'package:exam_app/features/auth/forget_password/presentation/pages/email_
 import 'package:exam_app/features/auth/forget_password/presentation/pages/forget_password_view.dart';
 import 'package:exam_app/features/auth/forget_password/presentation/pages/reset_password_view.dart';
 import 'package:exam_app/features/exam_questions/presentation/pages/exam_score_page.dart';
+import 'package:exam_app/features/results/presentation/pages/results_screen.dart';
+import 'package:exam_app/features/results/presentation/pages/review_screen.dart';
 import 'package:flutter/material.dart';
 import '../../features/Home/presentation/pages/home_screen.dart';
 import '../../features/auth/sign_in/presentation/pages/sign_in_screen.dart';
@@ -21,6 +23,8 @@ class AppRoutes {
     ExamDetailsScreen.routeName: (_) => ExamDetailsScreen(),
     ExamQuestionsPageScreen.routeName: (_) => ExamQuestionsPageScreen(),
     StartExamScreen.routeName: (_) => StartExamScreen(),
-    ExamScorePage.routeName : (_)=> ExamScorePage()
+    ExamScorePage.routeName: (_) => ExamScorePage(),
+    ResultsScreen.routeName: (_) => ResultsScreen(),
+    ReviewScreen.routeName: (_) => ReviewScreen(),
   };
 }
