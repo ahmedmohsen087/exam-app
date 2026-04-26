@@ -9,6 +9,8 @@ import 'package:exam_app/features/exam_questions/presentation/widgets/question_w
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'exam_score_page.dart';
+
 class ExamQuestionsPageScreen extends StatelessWidget {
   static const String routeName = 'Exam Page Screen';
 

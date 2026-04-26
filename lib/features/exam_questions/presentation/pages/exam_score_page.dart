@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../../../core/values/arg_param.dart';
+import '../../../Home/presentation/pages/result_screen.dart';
 
 class ExamScorePage extends StatefulWidget {
   static String routeName = "exam score screen";
@@ -92,7 +93,7 @@ Widget build(BuildContext context) {
 
     Navigator.pushNamed(
       context,
-      .routeName,
+      ResultScreen.routeName,
       arguments: attempt,
     );
   },
