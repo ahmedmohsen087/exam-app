@@ -2,21 +2,20 @@ import 'package:exam_app/features/exam_questions/data/data_sources/questions_loc
 import 'package:exam_app/features/exam_questions/data/models/mappers/question_cache_mapper.dart';
 import 'package:exam_app/features/exam_questions/domain/entities/question.dart';
 import 'package:hive_ce_flutter/adapters.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: QuestionsLocalDataSource)
 class QuestionsLocalDataSourceImpl implements QuestionsLocalDataSource {
   final Box<List<dynamic>> box;
 
   QuestionsLocalDataSourceImpl(this.box);
 
   @override
-  Future<void> cacheQuestions(
-    List<Question> questions,
-    String examId,
-  ) async {
+  Future<void> cacheQuestions(List<Question> questions, String examId) async {
     final cachedList = questions
-        .map((q) => QuestionCacheMapper.toMap(
-              QuestionCacheMapper.fromEntity(q),
-            ))
+        .map(
+          (q) => QuestionCacheMapper.toMap(QuestionCacheMapper.fromEntity(q)),
+        )
         .toList();
 
     await box.put(examId, cachedList);

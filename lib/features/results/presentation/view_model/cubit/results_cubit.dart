@@ -2,7 +2,9 @@ import 'package:exam_app/features/results/domain/usecases/results_use_case.dart'
 import 'package:exam_app/features/results/presentation/view_model/events/results_events.dart';
 import 'package:exam_app/features/results/presentation/view_model/states/results_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class ResultsCubit extends Cubit<ResultsState> {
   final ResultsUseCase useCase;
 
@@ -26,15 +28,9 @@ class ResultsCubit extends Cubit<ResultsState> {
     try {
       final data = await useCase.getAttempts();
 
-      emit(state.copyWith(
-        isLoading: false,
-        attempts: data,
-      ));
+      emit(state.copyWith(isLoading: false, attempts: data));
     } catch (e) {
-      emit(state.copyWith(
-        isLoading: false,
-        error: e.toString(),
-      ));
+      emit(state.copyWith(isLoading: false, error: e.toString()));
     }
   }
 
@@ -46,15 +42,9 @@ class ResultsCubit extends Cubit<ResultsState> {
 
       final data = await useCase.getAttempts();
 
-      emit(state.copyWith(
-        isLoading: false,
-        attempts: data,
-      ));
+      emit(state.copyWith(isLoading: false, attempts: data));
     } catch (e) {
-      emit(state.copyWith(
-        isLoading: false,
-        error: e.toString(),
-      ));
+      emit(state.copyWith(isLoading: false, error: e.toString()));
     }
   }
 }

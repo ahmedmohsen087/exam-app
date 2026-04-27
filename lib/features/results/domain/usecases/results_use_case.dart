@@ -1,6 +1,8 @@
 import 'package:exam_app/features/results/domain/repositories/results_repo.dart';
+import 'package:injectable/injectable.dart';
 import '../entities/exam_attempt_entity.dart';
 
+@injectable
 class ResultsUseCase {
   final ResultsRepository repository;
 
